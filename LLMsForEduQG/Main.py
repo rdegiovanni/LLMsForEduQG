@@ -25,14 +25,21 @@ if __name__ == '__main__':
     parser.add_argument("-r", "--random", dest="random_choice", type=bool,
                         default=False, help="Random order of analysed questions.", metavar="RANDOM")
 
-    parser.add_argument("-m", "--models", '--model-list', type=list_of_strings, dest="models_list",
-                        default="", help="List of LLMs to run.", metavar="MODELS")
+    parser.add_argument("-m", "--models", type=list_of_strings, dest="models_list",
+                        default="", help="List the LLMs to run.", metavar="MODELS")
 
     parser.add_argument("-sw", '--starts-with', type=str, dest="models_prefix",
                         default=None, help="Selects all LLMs starting with the <prefix>.", metavar="PREFIX")
 
-    parser.add_argument("-p", "--prompts", '--prompt-list', type=list_of_strings, dest="prompts_list",
-                        default="", help="List of prompts to use.", metavar="PROMPTS")
+    parser.add_argument("-p", "--prompts", type=list_of_strings, dest="prompts_list",
+                        default="", help="List the prompts to use.", metavar="PROMPTS")
+
+    parser.add_argument('-ll', '--llms', "--llm-list",dest="list_llms",
+                        action='store_true', help="List the supported LLMs.")
+
+    parser.add_argument('-pl', "--prompt-list", dest="list_prompts",
+                        action='store_true', help="List the available prompts.")
+
 
     args = parser.parse_args()
 
@@ -44,6 +51,11 @@ if __name__ == '__main__':
     else:
         #generate LLMrunner
         LLMrunner = LLMsForEduQG(args.input_filename, args.results_dir, args.MAX, args.random_choice)
+
+        if args.list_llms:
+            LLMrunner.llm_service.print_supported_llms()
+        if args.list_prompts:
+            PromptID.print_supported_prompts()
 
         # include only supported models
         models = []

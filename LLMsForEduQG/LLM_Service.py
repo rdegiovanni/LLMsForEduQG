@@ -69,6 +69,11 @@ class LLM_Service:
         'GPT40613': 'gpt-4-0613',  # snapshot June 13th 2023
     } # ["gpt-4o-mini", "meta-llama/Meta-Llama-3.1-70B-Instruct"]
 
+    def print_supported_llms(self):
+        print("List of supported LLMs:")
+        for llm, url in self.supported_models.items():
+            print("{} : {}".format(llm, url))
+
     cold_models = []
     # ['Llama31405Instruct', 'Llama27', 'Llama270', 'FlanT5Base', 'FlanT5XXL', 'MT5Base', 'MT5Large', 'MT5Small',
     #  'Gemma2BIT', 'Mistral7B02Instruct']

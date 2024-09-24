@@ -8,6 +8,12 @@ class PromptID(Enum):
     def all(self):
         return list(map(lambda c: c, self))
 
+    @classmethod
+    def print_supported_prompts(self):
+        print("List of supported Prompts:")
+        for p in self.all():
+            print("{} : {}".format(p.name, p))
+
 class Prompt:
 
     id: PromptID
