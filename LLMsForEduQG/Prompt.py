@@ -1,27 +1,12 @@
 from enum import Enum
-import MultipleChoiceQuestion
-from langchain_core.prompts import PromptTemplate
-# -----------------------------------------------------------------------
-# enumerations
-# -----------------------------------------------------------------------
 
 class PromptID(Enum):
     Simple = 0
     Simple_plus_Answer = 1
 
-
     @classmethod
     def all(self):
         return list(map(lambda c: c, self))
-
-
-
-# QuestionType = Enum('QuestionType', 'multiple_choice')
-# VariantType = Enum('VariantType', 'include_answer no_answer')
-
-# -----------------------------------------------------------------------
-# main class
-# -----------------------------------------------------------------------
 
 class Prompt:
 

@@ -57,7 +57,7 @@ class LLMsForEduQG:
         for prompt in self.prompts[self.prompts["question_id"] == qid]["prompt"]:
             if prompt.id is not pid:
                 continue
-            print("Running Prompt id:{}".format(prompt.id))
+            print("Running QID: {}, PID: {}, MID: {}.".format(qid,prompt.id,mid))
             response = self.llm_service.execute_prompt(mid,prompt.prompt)
             if response is None:
                 answer_result = {"question_id" : qid,
@@ -120,16 +120,22 @@ class LLMsForEduQG:
         data_file.close()
 
 
-    def run_per_qid(self,prompt_ids=PromptID.all(),model_ids=LLM_Service.supported_models):
-
-        first_qid = True
+    def run_per_qid(self,prompt_ids=PromptID.all(),model_ids=[],new_file=True):
         for qid in self.selected_questions:
             for pid in prompt_ids:
                 self.generate_prompts(qid,pid)
                 for mid in model_ids:
                     self.execute(qid,pid,mid)
-                    self.report(qid,pid,mid,first_qid)
-                    first_qid = False
+                    self.report(qid,pid,mid,new_file)
+                    new_file = False
         self.statistics.generate_summary()
         self.statistics.compute_statistics()
         self.statistics.generate_plots()
+
+        print()
+        print()
+        print(">>>>")
+        print("Cold Models: {}".format(self.llm_service.cold_models))
+        print()
+        print("Unsupported Models: {}".format(self.llm_service.error_models))
+
