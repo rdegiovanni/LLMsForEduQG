@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, validator
-from typing import Optional, Union, Required
+from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class MultipleChoiceQuestion(BaseModel):
