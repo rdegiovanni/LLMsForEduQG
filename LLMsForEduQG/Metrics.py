@@ -49,9 +49,12 @@ class Metrics():
         return (self.normalize_answer(prediction) == self.normalize_answer(ground_truth))
 
     def lexical_diversity(self,prediction, rank=3):
+        if prediction in None or prediction == "":
+            return 0.0
         n_grams = list(ngrams(prediction.split(), rank))
         distinct_ngrams = set(ngrams(prediction.split(), rank))
-
+        if len(prediction.split()) == 0:
+            return 0.0
         return len(distinct_ngrams) / len(prediction.split())
 
     def compute_bleu(self,prediction,gt):

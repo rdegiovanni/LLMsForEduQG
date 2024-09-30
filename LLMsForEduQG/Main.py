@@ -50,7 +50,10 @@ if __name__ == '__main__':
         raise parser.error("Input filename does not exist.\n")
     else:
         #generate LLMrunner
-        LLMrunner = LLMsForEduQG(args.input_filename, args.results_dir, args.MAX, args.random_choice)
+        LLMrunner = LLMsForEduQG(input_filename=args.input_filename,
+                                 results_dir=args.results_dir,
+                                 MAX=args.MAX,
+                                 random_choice=args.random_choice)
 
         if args.list_llms:
             LLMrunner.llm_service.print_supported_llms()
