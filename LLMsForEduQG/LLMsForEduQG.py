@@ -68,6 +68,15 @@ class LLMsForEduQG:
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = "0.0"
                 self.generated_questions = self.generated_questions._append(answer_result, ignore_index = True)
+            elif response == "error=429":
+                answer_result = {"question_id": qid,
+                                 "prompt_id": prompt.id.name,
+                                 "model_id": mid,
+                                 "question": "error=429", "correct_answer": "",
+                                 "distractor1": "", "distractor2": "", "distractor3": "", "support": ""}
+                for m in self.metrics.get_available_metrics():
+                    answer_result[m] = "0.0"
+                self.generated_questions = self.generated_questions._append(answer_result, ignore_index=True)
             else:
                 answer_scores = self.metrics.compute_scores(response.question,expected_question)
                 answer_result = {"question_id" : qid,
@@ -90,7 +99,7 @@ class LLMsForEduQG:
 
 
     def load_testing_data(self, inputname, MAX=0, random_choice=False):
-        self.ground_truth_questions = pd.read_csv(inputname)
+        self.ground_truth_questions = pd.read_csv(inputname, keep_default_na=False)
         if MAX <= 0:
             self.selected_questions.extend(sorted(self.ground_truth_questions["question_id"]))
         else:
@@ -98,6 +107,14 @@ class LLMsForEduQG:
                 self.selected_questions.extend(random.sample(sorted(self.ground_truth_questions["question_id"]), MAX))
             else:
                 self.selected_questions.extend(self.ground_truth_questions["question_id"][:MAX])
+
+    def is_valid_context(self,qid):
+        qid_indexes = self.ground_truth_questions["question_id"] == qid
+        support_text : str
+        support_text = self.ground_truth_questions["support"][qid_indexes].values[0]
+        if support_text is None or support_text == "" or len(support_text) == 0 or support_text.lower() == "nan":
+            return False
+        return True
 
     def report(self,qid,pid,mid,first_time = False):
         data_file = None
@@ -122,12 +139,15 @@ class LLMsForEduQG:
 
     def run_per_qid(self,prompt_ids=PromptID.all(),model_ids=[],new_file=True):
         for qid in self.selected_questions:
+            if not self.is_valid_context(qid):
+                continue
             for pid in prompt_ids:
                 self.generate_prompts(qid,pid)
                 for mid in model_ids:
                     self.execute(qid,pid,mid)
                     self.report(qid,pid,mid,new_file)
                     new_file = False
+        self.statistics.clean_generated_questions()
         self.statistics.generate_summary()
         self.statistics.compute_statistics()
         self.statistics.generate_plots()

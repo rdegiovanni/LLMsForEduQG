@@ -18,6 +18,7 @@ class Statistics:
     INPUT_FILENAME = ""
     RESULTS_DIR = "results/"
     RESULTS_FILENAME = "results/generated_questions.csv"
+    CLEAN_RESULTS_FILENAME = "results/clean_generated_questions.csv"
     RESULTS_STATISTICS = "results/statistics.csv"
     RESULTS_SUMMARY = "results/summary.csv"
 
@@ -27,6 +28,7 @@ class Statistics:
         path = Path(results_dir)
         path.mkdir(parents=True, exist_ok=True)
         self.RESULTS_FILENAME = self.RESULTS_DIR+"/generated_questions.csv"
+        self.CLEAN_RESULTS_FILENAME = self.RESULTS_DIR + "/clean_generated_questions.csv" # remove broken/invalid cases
         self.RESULTS_STATISTICS = self.RESULTS_DIR+"/statistics.csv"
         self.RESULTS_SUMMARY = self.RESULTS_DIR + "/summary.csv"
         self.metrics = metrics
@@ -69,8 +71,34 @@ class Statistics:
 
         return estimate, magnitude
 
+    def clean_generated_questions(self):
+        df = pd.read_csv(self.RESULTS_FILENAME, keep_default_na=False)
+
+        data_file = open(self.CLEAN_RESULTS_FILENAME, 'w', newline='', encoding='utf-8')
+        csv_writer = csv.writer(data_file, quoting=csv.QUOTE_NONNUMERIC)
+        csv_writer.writerow(
+            ['question_id', 'prompt_id', 'model_id', 'question', 'correct_answer', 'distractor1', 'distractor2',
+             'distractor3', 'support'] + self.metrics.get_available_metrics())
+
+        for qid in df['question_id'].unique():
+            for pid in df['prompt_id'].unique():
+                for mid in df['model_id'].unique():
+                    qid_rows = df.loc[(df["question_id"] == qid) &
+                                     (df["prompt_id"] == pid) &
+                                     (df['model_id'] == mid), :]
+
+                    for qid_row in qid_rows.values:
+                        # remove broken and invalid cases. question/answer/context are empty.
+                        if (qid_row[3] == "") or (qid_row[4] == "") or (qid_row[8] == ""): # or (qid_row[5] == "")
+                            print("clean_generated_questions: QID: {}, PID: {}, MID: {}".format(qid_row[0], qid_row[1], qid_row[2]))
+                            continue
+                        csv_writer.writerow(qid_row)
+
+        data_file.flush()
+        data_file.close()
+
     def compute_statistics(self):
-        df_all = pd.read_csv(self.RESULTS_FILENAME)
+        df_all = pd.read_csv(self.CLEAN_RESULTS_FILENAME, keep_default_na=False)
 
         # # summary file
         # summary_file = open(self.RESULTS_SUMMARY, 'w')
@@ -85,18 +113,23 @@ class Statistics:
         for mid in df_all['model_id'].unique():
             mid_indexes = df_all['model_id'] == mid
             df = df_all[mid_indexes]
+            # ignore models that did not produce any question
+            if all(len(ele) == 0 for ele in df['question'].values.astype(str)):
+                continue
             for metric in self.metrics.get_available_metrics():
                 for treatment in df['prompt_id'].unique():
-                    treatment_values = df[metric][df['prompt_id'] == treatment].values.astype(float)
-                    # summary_writer.writerow(["gpt-4o-mini", treatment, metric,
-                    #              "{:.2f}".format(np.median(treatment_values)),
-                    #              "{:.2f}".format(np.mean(treatment_values)),
-                    #              "{:.2f}".format(np.median(treatment_values)),
-                    #              "{:.2f}".format(np.mean(treatment_values))])
                     for control in df['prompt_id'].unique():
                         if treatment == control:
                             continue
-                        control_values = df[metric][df['prompt_id'] == control].values.astype(float)
+                        treatment_values = []
+                        control_values = []
+                        for qid in df['question_id'].unique():
+                            treatment_value = df[metric][(df["question_id"] == qid) & (df["prompt_id"] == treatment) & (df['model_id'] == mid)].values.astype(float)
+                            control_value = df[metric][(df["question_id"] == qid) & (df["prompt_id"] == control) & (df['model_id'] == mid)].values.astype(float)
+                            # if both models succeeded
+                            if len(treatment_value) == 1 and len (control_value) == 1:
+                                treatment_values.append(treatment_value[0])
+                                control_values.append((control_value[0]))
                         wil_p = 0
                         ken_p = 0
                         A12 = 0
@@ -116,26 +149,42 @@ class Statistics:
         statistics_file.close()
 
     def generate_summary(self):
-        df = pd.read_csv(self.RESULTS_FILENAME)
+        d_type = {"question_id":str,"prompt_id":str,"model_id":str,"question":str,
+                  "correct_answer":str,"distractor1":str,"distractor2":str,"distractor3":str,"support":str,
+                  "bleu_1":float,"bleu_2":float,"bleu_3":float,"bleu_4":float,"f1":float,"ppl_scores":float,"divs":float,"grammer":float}
+        df = pd.read_csv(self.CLEAN_RESULTS_FILENAME, keep_default_na=False)#dtype=d_type)
         # # summary file
         summary_file = open(self.RESULTS_SUMMARY, 'w', newline='', encoding='utf-8')
         summary_writer = csv.writer(summary_file)
-        summary_writer.writerow(['prompt_id','model_id'] + self.metrics.get_available_metrics())
+        summary_writer.writerow(['prompt_id','model_id'] + self.metrics.get_available_metrics() + ['num_gen_questions','success_ratio'])
+
+        df_gen = pd.read_csv(self.RESULTS_FILENAME, keep_default_na=False)
+        total_questions = df_gen['question_id'].unique().size
+        if total_questions == 0:
+            total_questions = 1 # avoid div by zero later
         for pid in df['prompt_id'].unique():
             pid_indexes =df['prompt_id'] == pid
             df_pid = df[pid_indexes]
             for mid in df_pid['model_id'].unique():
+                # ignore models that did not produce any question
+                if all(len(ele) == 0 for ele in df_pid['question'][df_pid['model_id'] == mid].values.astype(str)):
+                    continue
+
+                num_gen_questions = len(df_pid['question_id'][df_pid['model_id'] == mid].values)
+
                 stats_row = [pid,mid]
                 for metric in self.metrics.get_available_metrics():
                     treatment_values = df_pid[metric][df_pid['model_id'] == mid].values.astype(float)
                     stats_row.append("{:.2f}".format(np.mean(treatment_values)))
+                stats_row.append("{}".format(num_gen_questions))
+                stats_row.append("{:.2f}".format(num_gen_questions/total_questions))
                 summary_writer.writerow(stats_row)
                 summary_file.flush()
 
         summary_file.close()
 
     def generate_plots(self):
-        df = pd.read_csv(self.RESULTS_FILENAME)
+        df = pd.read_csv(self.CLEAN_RESULTS_FILENAME,keep_default_na=False)
 
         for metric in self.metrics.get_available_metrics():
             print("Metric: {}".format(metric))
@@ -146,6 +195,9 @@ class Statistics:
                 df_pid = df[df['prompt_id'] == pid]
                 for mid in df['model_id'].unique():
                     df_mid = df_pid[df_pid['model_id'] == mid]
+                    # ignore models that did not produce any question
+                    if all(len(ele) == 0 for ele in df_mid['question'].values.astype(str)):
+                        continue
                     pid_mid_values = df_mid[metric].values
                     pid_mid_median = np.median(pid_mid_values)
                     pid_mid_mean = np.mean(pid_mid_values)

@@ -178,7 +178,7 @@ class LLM_Service:
         headers = {"Authorization": f"Bearer {self.hf_api_key}"} # "x-wait-for-model": "true"
         API_URL = f"https://api-inference.huggingface.co/models/{model_url}"
         parameters = {}
-        if not model_id.startswith("Flan"):
+        if (not model_id.startswith("Flan")) and (not model_id.startswith("MT5")):
             parameters['return_full_text'] = False
         parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
         format_instructions = parser.get_format_instructions()
@@ -198,6 +198,9 @@ class LLM_Service:
                     self.cold_models.append(model_id)
                 elif response.status_code == 504: # model timeout
                     self.timeout_models.append(model_id)
+                elif response.status_code == 429: # Rate limit reached.
+                    print('hf_execute_prompt: Rate limit reached' + response.text)
+                    return "error=429"
                 else: # response.status_code == 403 or 400: # error model
                     self.error_models.append(model_id)
                 print('hf_execute_prompt: not response.ok' + response.text)
