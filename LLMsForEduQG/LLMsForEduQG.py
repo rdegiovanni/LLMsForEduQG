@@ -138,12 +138,12 @@ class LLMsForEduQG:
 
 
     def run_per_qid(self,prompt_ids=PromptID.all(),model_ids=[],new_file=True):
-        for qid in self.selected_questions:
-            if not self.is_valid_context(qid):
-                continue
-            for pid in prompt_ids:
-                self.generate_prompts(qid,pid)
-                for mid in model_ids:
+        for mid in model_ids: # running the same model is more efficient
+            for qid in self.selected_questions:
+                if not self.is_valid_context(qid):
+                    continue
+                for pid in prompt_ids:
+                    self.generate_prompts(qid,pid)
                     self.execute(qid,pid,mid)
                     self.report(qid,pid,mid,new_file)
                     new_file = False
