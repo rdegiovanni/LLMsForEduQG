@@ -4,6 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
+import seaborn as sns
 from matplotlib import pyplot as plt
 import scipy.stats as ss
 from bisect import bisect_left
@@ -89,7 +90,7 @@ class Statistics:
 
                     for qid_row in qid_rows.values:
                         # remove broken and invalid cases. question/answer/context are empty.
-                        if (qid_row[3] == "") or (qid_row[4] == "") or (qid_row[8] == ""): # or (qid_row[5] == "")
+                        if (qid_row[3] == "") or (qid_row[4] == ""): #or (qid_row[8] == ""): # or (qid_row[5] == "")
                             print("clean_generated_questions: QID: {}, PID: {}, MID: {}".format(qid_row[0], qid_row[1], qid_row[2]))
                             continue
                         csv_writer.writerow(qid_row)
@@ -184,40 +185,19 @@ class Statistics:
         summary_file.close()
 
     def generate_plots(self):
-        df = pd.read_csv(self.CLEAN_RESULTS_FILENAME,keep_default_na=False)
-
+        df = pd.read_csv(self.CLEAN_RESULTS_FILENAME, keep_default_na=False)
         for metric in self.metrics.get_available_metrics():
             print("Metric: {}".format(metric))
-            y_data = []
-            x_data = []
-            # df_metric = df[df['metric'] == metric]
-            for pid in df['prompt_id'].unique():
-                df_pid = df[df['prompt_id'] == pid]
-                for mid in df['model_id'].unique():
-                    df_mid = df_pid[df_pid['model_id'] == mid]
-                    # ignore models that did not produce any question
-                    if all(len(ele) == 0 for ele in df_mid['question'].values.astype(str)):
-                        continue
-                    pid_mid_values = df_mid[metric].values
-                    pid_mid_median = np.median(pid_mid_values)
-                    pid_mid_mean = np.mean(pid_mid_values)
-                    x_data.append(pid+"_"+mid)
-                    y_data.append(list(pid_mid_values))
-                    #fig.add_trace(go.Box(y=pid_values, name=pid, boxpoints='outliers')) #marker_color='#3D6270',
-                    print("Prompt: {}, Model: {}, median: {}, mean: {}".format(pid, mid, pid_mid_median, pid_mid_mean))
+            plt.figure()
+            sns.boxplot(x="model_id", y=metric, hue="prompt_id", data=df,
+                             showmeans=True, palette='Set2')  # tick_labels=x_data, split=True,
+            plt.legend(title="Prompt", loc="lower center",bbox_to_anchor=(.5, 1), ncol=3, frameon=False,)
+            plt.xticks(rotation=90)
+            plt.xlabel("Large Language Model")
+            plt.ylabel("{}".format(metric.upper()))
+            plt.tight_layout()
+            plt.savefig(self.RESULTS_DIR + "/" + metric + ".pdf")
+            print(">>>")
+            print(">>>")
 
-            print(">>>")
-            print(">>>")
-            fig, ax = plt.subplots()
-            ax.set_ylabel("{}".format(metric.upper()))
-            ax.set_xlabel("Prompts + Model")
-            ax.boxplot(y_data, tick_labels=x_data, showmeans=True)
-            plt.style.use('default')
-            # ax.set_xticklabels(x_data)
-            plt.savefig(self.RESULTS_DIR+"/"+metric+".pdf")
-            # fig.update_layout(template="plotly_white", showlegend=False, margin=dict(l=10, r=10, b=10, t=10),
-            #                   xaxis_title='<b>Prompts</b>',
-            #                   yaxis_title="<b>{}</b>".format(metric.upper()),
-            #                   )
-            #
-            # fig.write_image(self.RESULTS_DIR+"/"+metric+".pdf")
+   
