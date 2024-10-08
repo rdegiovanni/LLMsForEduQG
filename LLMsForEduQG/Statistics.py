@@ -200,4 +200,3 @@ class Statistics:
             print(">>>")
             print(">>>")
 
-   

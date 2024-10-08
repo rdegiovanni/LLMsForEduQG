@@ -13,6 +13,25 @@ class MyTestCase(unittest.TestCase):
         models = LLMrunner.llm_service.get_model_ids_startswith("Flan")
         LLMrunner.run_per_qid(prompt_IDs, models)
 
+    def test_only_Falcon(self):
+        MAX = 1
+        random_choice = False
+        SciQdataset = r"D:\PycharmProjects\LLMsForEduQG\datasets\SciQ_test.csv"
+        results_dir = r"D:\PycharmProjects\LLMsForEduQG\results\\" + str(MAX)
+        LLMrunner = LLMsForEduQG(SciQdataset, results_dir, MAX, random_choice)
+        prompt_IDs = [PromptID.Simple_plus_Answer]
+        models = LLMrunner.llm_service.get_model_ids_startswith("Falcon")
+        LLMrunner.run_per_qid(prompt_IDs, models)
+
+    def test_Llama_32(self):
+        MAX = 1
+        random_choice = False
+        SciQdataset = r"D:\PycharmProjects\LLMsForEduQG\datasets\SciQ_test.csv"
+        results_dir = r"D:\PycharmProjects\LLMsForEduQG\results\\" + str(MAX)
+        LLMrunner = LLMsForEduQG(SciQdataset, results_dir, MAX, random_choice)
+        prompt_IDs = [PromptID.Simple_plus_Answer]
+        models = ["Llama321Instruct","Llama321","Llama323Instruct","Llama323"]
+        LLMrunner.run_per_qid(prompt_IDs, models)
     # def test_all(self):
     #     MAX = 0
     #     random_choice = False

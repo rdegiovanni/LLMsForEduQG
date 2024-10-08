@@ -14,6 +14,10 @@ class LLM_Service:
     # key : model
     supported_models = {
         # HuggingFace Llama
+        'Llama321Instruct': 'meta-llama/Llama-3.2-1B-Instruct',
+        'Llama321': 'meta-llama/Llama-3.2-1B',
+        'Llama323Instruct': 'meta-llama/Llama-3.2-3B-Instruct',
+        'Llama323': 'meta-llama/Llama-3.2-3B',
         'Llama31405Instruct': 'meta-llama/Meta-Llama-3.1-405B-Instruct',
         'Llama31405': 'meta-llama/Meta-Llama-3.1-405B',
         'Llama3170Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
