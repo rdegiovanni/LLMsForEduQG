@@ -4,8 +4,10 @@ from openai import OpenAI
 import requests
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import ValidationError
-
+from transformers import pipeline
+import torch
 from MultipleChoiceQuestion import MultipleChoiceQuestion
+from huggingface_hub import InferenceClient
 
 class LLM_Service:
 
@@ -91,6 +93,7 @@ class LLM_Service:
         # This is the default and can be omitted
         api_key=os.environ.get("OPENAI_API_KEY"),
     )
+
     hf_api_key = os.environ.get("API_KEY_HUGGINGFACE")
 
     def get_all_models(self):
@@ -119,6 +122,8 @@ class LLM_Service:
             response = self.gpt_old_execute_prompt(model_id, prompt)
         elif model_id.startswith('GPT'):
             response = self.gpt_execute_prompt(model_id,prompt)
+        elif model_id.startswith('Llama32'):
+            response = self.hf_execute_prompt_Llama32(model_id,prompt)
         else:  # use model from HF
             response = self.hf_execute_prompt(model_id,prompt)
         # else:
@@ -223,3 +228,36 @@ class LLM_Service:
         except Exception as exc:
             print("hf_execute_prompt: general exception: ",exc)
             return None
+
+
+    def hf_execute_prompt_Llama32(self, model_id, prompt: str):
+        model_url = self.get_model_url(model_id)
+        if model_url == "":
+            model_url = self.get_model_url("Llama321Instruct")
+
+        parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
+        format_instructions = parser.get_format_instructions()
+        try:
+            client = InferenceClient(
+                model_url,
+                token=self.hf_api_key,
+            )
+            messages = [{"role": "user", "content": prompt + format_instructions}]
+            completion = client.chat.completions.create(
+                model=model_url,
+                messages=messages
+            )
+            generated_text = completion.choices[0].message.content
+            if "error" in generated_text:
+                print("hf_llama32: error: ", generated_text)
+                return None
+            else:
+                parsed_mc_question = parser.invoke(generated_text)
+                return parsed_mc_question
+        except ValidationError as err:
+            print("hf_llama32:ValidationError: ", err)
+            return None
+        except Exception as exc:
+            print("hf_llama32: general exception: ", exc)
+            return None
+
