@@ -11,11 +11,21 @@ from huggingface_hub import InferenceClient
 
 class LLM_Service:
 
-    TIMEOUT = 300 # in seconds
+    TIMEOUT = 120 # in seconds
 
     # key : model
     supported_models = {
+        # DeepSeek
+        'DeepSeekR1Qwen32': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+        ##cold models
+        'DeepSeekR1': 'deepseek-ai/DeepSeek-R1',
+        'DeepSeekR1Qwen15': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B',
+        'DeepSeekR1Qwen7': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
+        'DeepSeekR1Qwen14': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B',
+        'DeepSeekR1Llama70': 'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
+        'DeepSeekR1Llama8': 'deepseek-ai/DeepSeek-R1-Distill-Llama-8B',
         # HuggingFace Llama
+        'Llama3370Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
         'Llama321Instruct': 'meta-llama/Llama-3.2-1B-Instruct',
         'Llama321': 'meta-llama/Llama-3.2-1B',
         'Llama323Instruct': 'meta-llama/Llama-3.2-3B-Instruct',
