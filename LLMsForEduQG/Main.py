@@ -26,13 +26,13 @@ if __name__ == '__main__':
                         default=False, help="Random order of analysed questions.", metavar="RANDOM")
 
     parser.add_argument("-m", "--models", type=list_of_strings, dest="models_list",
-                        default="", help="List the LLMs to run.", metavar="MODELS")
+                        default="", help="Select the LLMs to run.", metavar="MODELS")
 
     parser.add_argument("-sw", '--starts-with', type=str, dest="models_prefix",
                         default=None, help="Selects all LLMs starting with the <prefix>.", metavar="PREFIX")
 
     parser.add_argument("-p", "--prompts", type=list_of_strings, dest="prompts_list",
-                        default="", help="List the prompts to use.", metavar="PROMPTS")
+                        default="", help="Select the prompts to use.", metavar="PROMPTS")
 
     parser.add_argument('-ll', '--llms', "--llm-list",dest="list_llms",
                         action='store_true', help="List the supported LLMs.")

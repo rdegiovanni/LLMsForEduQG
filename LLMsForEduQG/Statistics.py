@@ -20,6 +20,8 @@ class Statistics:
     RESULTS_DIR = "results/"
     RESULTS_FILENAME = "results/generated_questions.csv"
     CLEAN_RESULTS_FILENAME = "results/clean_generated_questions.csv"
+    CHOICES_QUALITY_FILENAME = "results/choices_quality_analysis.csv"
+    CHOICES_SUMMARY_FILENAME = "results/choices_summary.csv"
     RESULTS_STATISTICS = "results/statistics.csv"
     RESULTS_SUMMARY = "results/summary.csv"
 
@@ -30,6 +32,8 @@ class Statistics:
         path.mkdir(parents=True, exist_ok=True)
         self.RESULTS_FILENAME = self.RESULTS_DIR+"/generated_questions.csv"
         self.CLEAN_RESULTS_FILENAME = self.RESULTS_DIR + "/clean_generated_questions.csv" # remove broken/invalid cases
+        self.CHOICES_QUALITY_FILENAME = self.RESULTS_DIR + "/choices_quality_analysis.csv"
+        self.CHOICES_SUMMARY_FILENAME = self.RESULTS_DIR + "/choices_summary.csv"
         self.RESULTS_STATISTICS = self.RESULTS_DIR+"/statistics.csv"
         self.RESULTS_SUMMARY = self.RESULTS_DIR + "/summary.csv"
         self.metrics = metrics
@@ -82,8 +86,8 @@ class Statistics:
              'distractor3', 'support'] + self.metrics.get_available_metrics())
 
         for qid in df['question_id'].unique():
-            for pid in df['prompt_id'].unique():
-                for mid in df['model_id'].unique():
+            for pid in df['prompt_id'].unique():    #"Llama370Instruct","GPT4oMini","Mistral7B03Instruct",
+                for mid in df['model_id'].unique():#["Llama3170Instruct","GPT35Turbo","Mixtral8x7B01Instruct","DeepSeekR1Qwen32"]: #df['model_id'].unique():
                     qid_rows = df.loc[(df["question_id"] == qid) &
                                      (df["prompt_id"] == pid) &
                                      (df['model_id'] == mid), :]
@@ -140,10 +144,10 @@ class Statistics:
                             _, ken_p = ss.kendalltau(treatment_values, control_values)
                             A12, _ = self.VD_A(treatment_values, control_values)
                         stats_row = [mid, metric, treatment, control,
-                                     "{:.2f}".format(np.median(treatment_values)),
-                                     "{:.2f}".format(np.mean(treatment_values)),
-                                     "{:.2f}".format(np.median(control_values)), "{:.2f}".format(np.mean(control_values)),
-                                     "{:.2f}".format(wil_p), "{:.2f}".format(ken_p), "{:.2f}".format(A12)]
+                                     "{:.4f}".format(np.median(treatment_values)),
+                                     "{:.4f}".format(np.mean(treatment_values)),
+                                     "{:.4f}".format(np.median(control_values)), "{:.4f}".format(np.mean(control_values)),
+                                     "{:.4f}".format(wil_p), "{:.4f}".format(ken_p), "{:.4f}".format(A12)]
                         statistics_writer.writerow(stats_row)
                         statistics_file.flush()
 
@@ -170,15 +174,15 @@ class Statistics:
                 # ignore models that did not produce any question
                 if all(len(ele) == 0 for ele in df_pid['question'][df_pid['model_id'] == mid].values.astype(str)):
                     continue
-
+                print("summary: PID: {}, MID: {}".format(pid, mid))
                 num_gen_questions = len(df_pid['question_id'][df_pid['model_id'] == mid].values)
 
                 stats_row = [pid,mid]
                 for metric in self.metrics.get_available_metrics():
                     treatment_values = df_pid[metric][df_pid['model_id'] == mid].values.astype(float)
-                    stats_row.append("{:.2f}".format(np.mean(treatment_values)))
+                    stats_row.append("{:.4f}".format(np.mean(treatment_values)))
                 stats_row.append("{}".format(num_gen_questions))
-                stats_row.append("{:.2f}".format(num_gen_questions/total_questions))
+                stats_row.append("{:.4f}".format(num_gen_questions/total_questions))
                 summary_writer.writerow(stats_row)
                 summary_file.flush()
 
@@ -200,3 +204,77 @@ class Statistics:
             print(">>>")
             print(">>>")
 
+    def compute_choices_quality(self, df_gt_questions, threshold = 1.0):
+        df = pd.read_csv(self.CLEAN_RESULTS_FILENAME, keep_default_na=False)
+
+        data_file = open(self.CHOICES_QUALITY_FILENAME, 'w', newline='', encoding='utf-8')
+        csv_writer = csv.writer(data_file, quoting=csv.QUOTE_NONNUMERIC)
+        csv_writer.writerow(
+            ['question_id', 'prompt_id', 'model_id', 'f1', 'answer_match', 'distractor1_match', 'distractor2_match',
+             'distractor3_match','any_distractors_match'] )
+
+        for qid in df['question_id'].unique():
+            for pid in df['prompt_id'].unique():
+                for mid in df['model_id'].unique():
+                    qid_rows = df.loc[(df["question_id"] == qid) &
+                                     (df["prompt_id"] == pid) &
+                                     (df['model_id'] == mid), :]
+                    if len(qid_rows.values) == 0:
+                        continue
+                    qid_row = qid_rows.values[0]
+                    # only check exact matches with cases with an F1 higher than the threshold
+                    if qid_row[13] >= threshold:
+                        gt_qid_row = df_gt_questions.loc[(df_gt_questions["question_id"] == qid), :].values[0]
+                        f1 = qid_row[13]
+                        answer_match = self.metrics.exact_match_score(qid_row[4],gt_qid_row[3])
+                        distractor1_match = self.metrics.exact_match_score(qid_row[5],gt_qid_row[4]) or self.metrics.exact_match_score(qid_row[5], gt_qid_row[5]) or self.metrics.exact_match_score(qid_row[4], gt_qid_row[6])
+
+                        distractor2_match = self.metrics.exact_match_score(qid_row[6], gt_qid_row[4]) or self.metrics.exact_match_score(qid_row[6], gt_qid_row[5]) or self.metrics.exact_match_score(qid_row[6], gt_qid_row[6])
+
+                        distractor3_match = self.metrics.exact_match_score(qid_row[7], gt_qid_row[4]) or self.metrics.exact_match_score(qid_row[7], gt_qid_row[5]) or self.metrics.exact_match_score(qid_row[7], gt_qid_row[6])
+
+                        any_distractors_match = distractor1_match or distractor2_match or distractor3_match
+                        choice_quality_row = [qid,pid,mid,f1,answer_match,distractor1_match,distractor2_match,distractor3_match,any_distractors_match]
+                        csv_writer.writerow(choice_quality_row)
+                        data_file.flush()
+        data_file.close()
+
+    def generate_choices_summary(self):
+        df = pd.read_csv(self.CHOICES_QUALITY_FILENAME, keep_default_na=False)#dtype=d_type)
+        # # summary file
+        summary_file = open(self.CHOICES_SUMMARY_FILENAME, 'w', newline='', encoding='utf-8')
+        summary_writer = csv.writer(summary_file)
+        summary_writer.writerow(['prompt_id','model_id','num_answer_match','num_distractor1_match',
+                                 'num_distractor2_match','num_distractor3_match','num_any_distractor',
+                                 'num_gen_questions', 'full_match',
+                                 'ratio_answer_match', 'ratio_distractors_match','ratio_full_match' ])
+        total_questions = df['question_id'].unique().size
+        print("Total Questions: {}".format(total_questions))
+        for pid in df['prompt_id'].unique():
+            pid_indexes =df['prompt_id'] == pid
+            df_pid = df[pid_indexes]
+            for mid in df_pid['model_id'].unique():
+                print("summary: PID: {}, MID: {}".format(pid, mid))
+                num_gen_questions = len(df_pid['question_id'][df_pid['model_id'] == mid].values)
+
+                #'answer_match', 'distractor1_match', 'distractor2_match','distractor3_match'
+                num_answer_match = np.sum(df_pid['answer_match'][df_pid['model_id'] == mid].values.astype(bool))
+                num_distractor1_match = np.sum(df_pid['distractor1_match'][df_pid['model_id'] == mid].values.astype(bool))
+                num_distractor2_match = np.sum(
+                    df_pid['distractor2_match'][df_pid['model_id'] == mid].values.astype(bool))
+                num_distractor3_match = np.sum(
+                    df_pid['distractor3_match'][df_pid['model_id'] == mid].values.astype(bool))
+                num_any_distractors_match = np.sum(
+                    df_pid['any_distractors_match'][df_pid['model_id'] == mid].values.astype(bool))
+                num_full_match = np.sum(df_pid['answer_match'][(df_pid['model_id'] == mid) & (df_pid['any_distractors_match'] == True)].values.astype(bool))
+
+                stats_row = [pid, mid, num_answer_match,
+                             num_distractor1_match,num_distractor2_match,num_distractor3_match,num_any_distractors_match,
+                             num_gen_questions,num_full_match,
+                             "{:.4f}".format(num_answer_match / num_gen_questions),
+                             "{:.4f}".format(num_any_distractors_match / num_gen_questions),
+                             "{:.4f}".format(num_full_match / num_gen_questions)]
+                summary_writer.writerow(stats_row)
+                summary_file.flush()
+
+        summary_file.close()
