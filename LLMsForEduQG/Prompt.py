@@ -1,8 +1,14 @@
+""""
+This file handles the creation of user prompts in different formats: Simple, Simple_plus_Answer, and FewShot, which includes examples retrieved through RAG.
+"""
+
 from enum import Enum
+from typing import List, Dict, Any
 
 class PromptID(Enum):
     Simple = 0
     Simple_plus_Answer = 1
+    FewShot = 2
 
     @classmethod
     def all(self):
@@ -18,11 +24,14 @@ class Prompt:
 
     id: PromptID
     prompt: str
-    gt_question: {}
+    gt_question: Dict[str, Any]
+    examples: List[Dict]
 
-    def __init__(self, id=PromptID.Simple, question=None):
+
+    def __init__(self, id=PromptID.Simple, question=None, examples=None):
         self.id = id
         self.gt_question = question
+        self.examples = examples if examples else []
         self.instantiate_prompt_template()
 
     # generate prompt templates
@@ -43,6 +52,22 @@ class Prompt:
         elif self.id == PromptID.Simple_plus_Answer:
                 self.prompt = ("Given support text \"%s\", create 1 expert level question with multiple choice answer from the text, "
               "for which the correct answer is \"%s\". Please, also create 3 distractors.") % (support_text,expected_answer)
+        elif self.id == PromptID.FewShot:
+            examples_str = ""
+            for i, ex in enumerate(self.examples):
+                examples_str += (
+                    f"Example {i+1}:\n"
+                    f"Support Text: \"{ex['support']}\"\n"
+                    f"Question: {ex['question']}\n"
+                    f"Correct Answer: {ex['correct_answer']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                f"Given support text \"{support_text}\", create 1 expert level question with multiple choice answer from the text. "
+                "Please also include the correct answer and 3 distractors. "
+                "Use the following examples as a guide. \n\n"
+                f"{examples_str}"
+            )
 
 
 

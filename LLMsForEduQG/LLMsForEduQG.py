@@ -5,6 +5,7 @@ import random
 from Prompt import PromptID
 from LLM_Service import LLM_Service
 from Prompt import Prompt
+from RAG_Service import RAG_Service
 
 import numpy as np
 import pandas as pd
@@ -16,6 +17,8 @@ class LLMsForEduQG:
     metrics: Metrics
     statistics: Statistics
     llm_service: LLM_Service
+    rag_service: RAG_Service
+
     ground_truth_questions = pd.DataFrame(columns = ['question_id','set','question','correct_answer','distractor1','distractor2','distractor3','support'])
     selected_questions = []
 
@@ -27,6 +30,8 @@ class LLMsForEduQG:
         self.metrics = Metrics()
         self.statistics = Statistics(input_filename,results_dir, self.metrics)
         self.llm_service = LLM_Service()
+
+        self.rag_service = RAG_Service(data_path=input_filename)
 
         self.generated_questions = pd.DataFrame(
             columns=['question_id', 'prompt_id', 'model_id', 'question', 'correct_answer', 'distractor1', 'distractor2',
@@ -47,7 +52,16 @@ class LLMsForEduQG:
                   'question' : self.ground_truth_questions["question"][qid_indexes].values[0],
                   'support' : self.ground_truth_questions["support"][qid_indexes].values[0]}
 
-        self.prompts = self.prompts._append({"question_id": qid, "prompt": Prompt(pid,question)
+        # RAG for when the prompt ID is FewShot
+        examples =[]
+        if pid == PromptID.FewShot:
+            # using the current question's support text as the query to find 3 similar texts in the datastore
+            examples = self.rag_service.retrieve_examples(
+                query_text=question["support"],
+                n_results=3
+            )
+        # passing examples, if any
+        self.prompts = self.prompts._append({"question_id": qid, "prompt": Prompt(pid,question, examples=examples)
                                                  }, ignore_index=True)
 
     def execute(self,qid,pid,mid):

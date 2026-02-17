@@ -1,3 +1,8 @@
+""""
+This file implements the RAG component of the project. The RAG_Service class creates a datastore with chromadb, embeds the documents with all-mpnet-base-v2, 
+and returns the 3 most similar examples to the user's query.
+"""
+
 import pandas as pd
 import chromadb
 from sentence_transformers import SentenceTransformer
@@ -31,6 +36,7 @@ class RAG_Service:
                 documents.append(row["support"])
 # what about the question id? shouldn't we include it in the metadatas instead of ids? or how is this supposed to work. ie, how are ids integrated in all this?
                 metadatas.append({
+                    "question_id": str(row.get("question_id", idx)),
                     "question": row["question"],
                     "correct_answer": row["correct_answer"],
                     "distractor1": row["distractor1"],
@@ -53,7 +59,7 @@ class RAG_Service:
         except Exception as e:
             print(f"Error during ingestion: {e}")
 
-    def retrieve_examples(self, query_text: str, n_results: int = 3) -> List[Dict[str, Any]]:  # why this datatype?
+    def retrieve_examples(self, query_text: str, n_results: int = 3) -> List[Dict[str, Any]]:  # why this datatype
         """Finds the top_n most similar examples to the query_text."""
         query_embedding = self.embedding_model.encode([query_text]).tolist()
 
