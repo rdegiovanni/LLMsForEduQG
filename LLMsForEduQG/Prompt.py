@@ -4,11 +4,14 @@ This file handles the creation of user prompts in different formats: Simple, Sim
 
 from enum import Enum
 from typing import List, Dict, Any
+import random
 
 class PromptID(Enum):
     Simple = 0
     Simple_plus_Answer = 1
     FewShot = 2
+    FewShot_Reverse = 3
+    FewShot_Random = 4
 
     @classmethod
     def all(self):
@@ -52,9 +55,18 @@ class Prompt:
         elif self.id == PromptID.Simple_plus_Answer:
                 self.prompt = ("Given support text \"%s\", create 1 expert level question with multiple choice answer from the text, "
               "for which the correct answer is \"%s\". Please, also create 3 distractors.") % (support_text,expected_answer)
-        elif self.id == PromptID.FewShot:
+        elif self.id in [PromptID.FewShot, PromptID.FewShot_Reverse, PromptID.FewShot_Random]:
+            ordered_examples = self.examples[:]
+
+            if self.id == PromptID.FewShot_Reverse:
+                ordered_examples.reverse()  # Least Similar first
+            elif self.id == PromptID.FewShot_Random:
+                random.shuffle(ordered_examples)  
+            
             examples_str = ""
-            for i, ex in enumerate(self.examples):
+            for i, ex in enumerate(self.ordered_examples):
+                # add mechanims to change order of the examples here
+                # like, there should be 3 configurations: most similar first, least similar first, and random
                 examples_str += (
                     f"Example {i+1}:\n"
                     f"Support Text: \"{ex['support']}\"\n"

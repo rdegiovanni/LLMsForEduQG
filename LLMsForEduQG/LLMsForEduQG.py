@@ -54,7 +54,7 @@ class LLMsForEduQG:
 
         # RAG for when the prompt ID is FewShot
         examples =[]
-        if pid == PromptID.FewShot:
+        if pid in [PromptID.FewShot, PromptID.FewShot_Reverse, PromptID.FewShot_Random]:
             # using the current question's support text as the query to find 3 similar texts in the datastore
             examples = self.rag_service.retrieve_examples(
                 query_text=question["support"],
