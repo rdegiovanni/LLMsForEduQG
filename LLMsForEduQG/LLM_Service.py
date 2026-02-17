@@ -2,7 +2,7 @@ import os
 
 from openai import OpenAI
 import requests
-from langchain.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import PydanticOutputParser
 from pydantic import ValidationError
 from transformers import pipeline
 import torch
@@ -75,6 +75,7 @@ class LLM_Service:
         # OpenAI's chat models
         'GPT4o': 'gpt-4o',
         'GPT4oMini': 'gpt-4o-mini',
+        'GPT5Nano': 'gpt-5-nano-2025-08-07',
         # 'GPTo1Mini': 'o1-mini', # Tier 5 is required
         'GPT4Turbo': 'gpt-4-turbo',
         'GPT4': 'gpt-4',
@@ -195,7 +196,7 @@ class LLM_Service:
             model_url = self.get_model_url("Llama3170Instruct")
 
         headers = {"Authorization": f"Bearer {self.hf_api_key}"} # "x-wait-for-model": "true"
-        API_URL = f"https://api-inference.huggingface.co/models/{model_url}"
+        API_URL = f"https://router.huggingface.co/models/{model_url}"
         parameters = {}
         if (not model_id.startswith("Flan")) and (not model_id.startswith("MT5")):
             parameters['return_full_text'] = False

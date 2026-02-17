@@ -61,8 +61,8 @@ class LLMsForEduQG:
                 n_results=3
             )
         # passing examples, if any
-        self.prompts = self.prompts._append({"question_id": qid, "prompt": Prompt(pid,question, examples=examples)
-                                                 }, ignore_index=True)
+        new_row = pd.DataFrame([{"question_id": qid, "prompt": Prompt(pid, question, examples=examples)}])
+        self.prompts = pd.concat([self.prompts, new_row], ignore_index=True)                                                 
 
     def execute(self,qid,pid,mid):
         qid_indexes = self.ground_truth_questions["question_id"] == qid
@@ -81,7 +81,7 @@ class LLMsForEduQG:
                                 "distractor1" : "", "distractor2" : "", "distractor3":"", "support" : ""}
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = "0.0"
-                self.generated_questions = self.generated_questions._append(answer_result, ignore_index = True)
+                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
             elif response == "error=429":
                 answer_result = {"question_id": qid,
                                  "prompt_id": prompt.id.name,
@@ -90,7 +90,7 @@ class LLMsForEduQG:
                                  "distractor1": "", "distractor2": "", "distractor3": "", "support": ""}
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = "0.0"
-                self.generated_questions = self.generated_questions._append(answer_result, ignore_index=True)
+                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
             else:
                 answer_scores = self.metrics.compute_scores(response.question,expected_question)
                 answer_result = {"question_id" : qid,
@@ -105,8 +105,7 @@ class LLMsForEduQG:
                                }
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = answer_scores[m][0]
-                self.generated_questions = self.generated_questions._append(answer_result, ignore_index = True)
-            break
+                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
         print(">>>")
         print(">>>")
 
