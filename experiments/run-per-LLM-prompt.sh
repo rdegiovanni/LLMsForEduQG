@@ -1,13 +1,19 @@
 #!/bin/bash
 
+MODELS=("GPT5Mini")
+PROMPTS=("FewShot" "FewShot_Reverse" "FewShot_Random")
 
-MODELS=""
-PROMPTS=""
+for LLM in "${MODELS[@]}"; do
+    for PROMPT in "${PROMPTS[@]}"; do
+        OUT_DIR="results_prompt_modes/${LLM}-${PROMPT}"
+        mkdir -p "$OUT_DIR"
 
-for LLM in $MODELS; do
-#for ((K=0;K<=690;K=K+10)); do
-	for PROMPT in PROMPTS; do
-		OUT_DIR=results/$LLM-$PROMPT
-		nohup ./LLMsForEduQG.sh -i datasets/SciQ_test.csv -o $OUT_DIR 1> $OUT_DIR/$LLM-$PROMPT_all.out 2> $OUT_DIR/$LLM-$PROMPT_all_err.out &
-	done
+        nohup ./LLMsForEduQG.sh \
+            -i datasets/SciQ_100_valid.csv \
+            -o "$OUT_DIR" \
+            -m "$LLM" \
+            -p "$PROMPT" \
+            > "$OUT_DIR/${LLM}-${PROMPT}_all.out" \
+            2> "$OUT_DIR/${LLM}-${PROMPT}_all_err.out" &
+    done
 done
