@@ -14,6 +14,7 @@ class LLM_Service:
         "NEB_Llama3370Instruct": "meta-llama/Llama-3.3-70B-Instruct-fast",
         "NEB_Qwen3235BInstruct": "Qwen/Qwen3-235B-A22B-Instruct-2507",
         "GPT5Mini": "gpt-5-mini-2025-08-07",
+        "GPT54Nano": "gpt-5.4-nano-2026-03-17",
     }
 
     def print_supported_llms(self):
@@ -61,7 +62,7 @@ class LLM_Service:
             print("Model Skipped:{}".format(model_id))
         return response
 
-    def gpt_execute_prompt(self, model_id="GPT4oMini", prompt=""):
+    def gpt_execute_prompt(self, model_id="GPT5Mini", prompt=""):
         model_url = self.get_model_url(model_id)
         if model_url == "":
             model_url = self.get_model_url("GPT4oMini")

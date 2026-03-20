@@ -137,16 +137,14 @@ import csv
 import json
 import random
 
-from Prompt import PromptID
-from LLM_Service import LLM_Service
-from Prompt import Prompt
-from RAG_Service import RAG_Service
-
 import numpy as np
 import pandas as pd
-
+from LLM_Service import LLM_Service
 from Metrics import Metrics
+from Prompt import Prompt, PromptID
+from RAG_Service import RAG_Service
 from Statistics import Statistics
+
 
 class LLMsForEduQG:
     metrics: Metrics
@@ -154,146 +152,234 @@ class LLMsForEduQG:
     llm_service: LLM_Service
     rag_service: RAG_Service
 
-    ground_truth_questions = pd.DataFrame(columns = ['question_id','set','question','correct_answer','distractor1','distractor2','distractor3','support'])
+    ground_truth_questions = pd.DataFrame(
+        columns=[
+            "question_id",
+            "set",
+            "question",
+            "correct_answer",
+            "distractor1",
+            "distractor2",
+            "distractor3",
+            "support",
+        ]
+    )
     selected_questions = []
 
-    prompts = pd.DataFrame(columns=['question_id', 'prompt'])
+    prompts = pd.DataFrame(columns=["question_id", "prompt"])
     generated_questions = None
 
-    def __init__(self,input_filename,results_dir,MAX=0,random_choice=False):
+    def __init__(self, input_filename, results_dir, MAX=0, random_choice=False):
 
         self.metrics = Metrics()
-        self.statistics = Statistics(input_filename,results_dir, self.metrics)
+        self.statistics = Statistics(input_filename, results_dir, self.metrics)
         self.llm_service = LLM_Service()
 
         self.rag_service = RAG_Service(data_path=input_filename)
-# TODO: doubt, shouldn't we use a different input data to embed for RAG than the one we use to generate the examples?
+        # TODO: doubt, shouldn't we use a different input data to embed for RAG than the one we use to generate the examples?
         self.generated_questions = pd.DataFrame(
-            columns=['question_id', 'prompt_id', 'model_id', 'question', 'correct_answer', 'distractor1', 'distractor2',
-                     'distractor3',
-                     'support'] + self.metrics.get_available_metrics())
+            columns=[
+                "question_id",
+                "prompt_id",
+                "model_id",
+                "question",
+                "correct_answer",
+                "distractor1",
+                "distractor2",
+                "distractor3",
+                "support",
+            ]
+            + self.metrics.get_available_metrics()
+        )
 
         self.load_testing_data(input_filename, MAX, random_choice)
 
-
     # It takes the question ID (qid) from the dataset, and the prompt id (pid)
-    def generate_prompts(self,qid,pid):
+    def generate_prompts(self, qid, pid):
 
         qid_indexes = self.ground_truth_questions["question_id"] == qid
-        question = {'correct_answer': self.ground_truth_questions["correct_answer"][qid_indexes].values[0],
-                  'distractor1' : self.ground_truth_questions["distractor1"][qid_indexes].values[0],
-                  'distractor2' : self.ground_truth_questions["distractor2"][qid_indexes].values[0],
-                  'distractor3' : self.ground_truth_questions["distractor3"][qid_indexes].values[0],
-                  'question' : self.ground_truth_questions["question"][qid_indexes].values[0],
-                  'support' : self.ground_truth_questions["support"][qid_indexes].values[0]}
+        question = {
+            "correct_answer": self.ground_truth_questions["correct_answer"][
+                qid_indexes
+            ].values[0],
+            "distractor1": self.ground_truth_questions["distractor1"][
+                qid_indexes
+            ].values[0],
+            "distractor2": self.ground_truth_questions["distractor2"][
+                qid_indexes
+            ].values[0],
+            "distractor3": self.ground_truth_questions["distractor3"][
+                qid_indexes
+            ].values[0],
+            "question": self.ground_truth_questions["question"][qid_indexes].values[0],
+            "support": self.ground_truth_questions["support"][qid_indexes].values[0],
+        }
 
         # RAG for when the prompt ID is FewShot
-        examples =[]
-        if pid in [PromptID.FewShot, PromptID.FewShot_Reverse, PromptID.FewShot_Random]:
+        examples = []
+        if pid in [
+            PromptID.FewShot,
+            PromptID.FewShot_Reverse,
+            PromptID.FewShot_Random,
+            PromptID.FewShot_Reverse_NoContext,
+            PromptID.FewShot_Reverse_NoAnswer,
+        ]:
             # using the current question's support text as the query to find 3 similar texts in the datastore
             examples = self.rag_service.retrieve_examples(
-                query_text=question["support"],
-                n_results=3
+                query_text=question["support"], n_results=3
             )
         # passing examples, if any
-        new_row = pd.DataFrame([{"question_id": qid, "prompt": Prompt(pid, question, examples=examples)}])
-        self.prompts = pd.concat([self.prompts, new_row], ignore_index=True)                                                 
+        new_row = pd.DataFrame(
+            [{"question_id": qid, "prompt": Prompt(pid, question, examples=examples)}]
+        )
+        self.prompts = pd.concat([self.prompts, new_row], ignore_index=True)
 
-    def execute(self,qid,pid,mid):
+    def execute(self, qid, pid, mid):
         qid_indexes = self.ground_truth_questions["question_id"] == qid
-        expected_question = self.ground_truth_questions["question"][qid_indexes].values[0]
+        expected_question = self.ground_truth_questions["question"][qid_indexes].values[
+            0
+        ]
 
         for prompt in self.prompts[self.prompts["question_id"] == qid]["prompt"]:
             if prompt.id is not pid:
                 continue
-            print("Running QID: {}, PID: {}, MID: {}.".format(qid,prompt.id,mid))
-            response = self.llm_service.execute_prompt(mid,prompt.prompt)
+            print("Running QID: {}, PID: {}, MID: {}.".format(qid, prompt.id, mid))
+            response = self.llm_service.execute_prompt(mid, prompt.prompt)
             if response is None:
-                answer_result = {"question_id" : qid,
-                                 "prompt_id" : prompt.id.name,
-                                 "model_id": mid,
-                                 "question" : "", "correct_answer" : "",
-                                "distractor1" : "", "distractor2" : "", "distractor3":"", "support" : ""}
+                answer_result = {
+                    "question_id": qid,
+                    "prompt_id": prompt.id.name,
+                    "model_id": mid,
+                    "question": "",
+                    "correct_answer": "",
+                    "distractor1": "",
+                    "distractor2": "",
+                    "distractor3": "",
+                    "support": "",
+                }
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = "0.0"
-                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
+                self.generated_questions = pd.concat(
+                    [self.generated_questions, pd.DataFrame([answer_result])],
+                    ignore_index=True,
+                )
             elif response == "error=429":
-                answer_result = {"question_id": qid,
-                                 "prompt_id": prompt.id.name,
-                                 "model_id": mid,
-                                 "question": "error=429", "correct_answer": "",
-                                 "distractor1": "", "distractor2": "", "distractor3": "", "support": ""}
+                answer_result = {
+                    "question_id": qid,
+                    "prompt_id": prompt.id.name,
+                    "model_id": mid,
+                    "question": "error=429",
+                    "correct_answer": "",
+                    "distractor1": "",
+                    "distractor2": "",
+                    "distractor3": "",
+                    "support": "",
+                }
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = "0.0"
-                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
+                self.generated_questions = pd.concat(
+                    [self.generated_questions, pd.DataFrame([answer_result])],
+                    ignore_index=True,
+                )
             else:
-                answer_scores = self.metrics.compute_scores(response.question,expected_question)
-                answer_result = {"question_id" : qid,
-                                 "prompt_id": prompt.id.name,
-                                 "model_id": mid,
-                                 "question" : response.question,
-                                "correct_answer" : response.correct_answer,
-                                "distractor1" : response.distractor1,
-                                "distractor2" : response.distractor2,
-                                "distractor3":response.distractor3,
-                                "support" : response.support
-                               }
+                answer_scores = self.metrics.compute_scores(
+                    response.question, expected_question
+                )
+                answer_result = {
+                    "question_id": qid,
+                    "prompt_id": prompt.id.name,
+                    "model_id": mid,
+                    "question": response.question,
+                    "correct_answer": response.correct_answer,
+                    "distractor1": response.distractor1,
+                    "distractor2": response.distractor2,
+                    "distractor3": response.distractor3,
+                    "support": response.support,
+                }
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = answer_scores[m][0]
-                self.generated_questions = pd.concat([self.generated_questions, pd.DataFrame([answer_result])], ignore_index=True)
+                self.generated_questions = pd.concat(
+                    [self.generated_questions, pd.DataFrame([answer_result])],
+                    ignore_index=True,
+                )
         print(">>>")
         print(">>>")
-
-
 
     def load_testing_data(self, inputname, MAX=0, random_choice=False):
         self.ground_truth_questions = pd.read_csv(inputname, keep_default_na=False)
         if MAX <= 0:
-            self.selected_questions.extend(sorted(self.ground_truth_questions["question_id"]))
+            self.selected_questions.extend(
+                sorted(self.ground_truth_questions["question_id"])
+            )
         else:
             if random_choice:
-                self.selected_questions.extend(random.sample(sorted(self.ground_truth_questions["question_id"]), MAX))
+                self.selected_questions.extend(
+                    random.sample(
+                        sorted(self.ground_truth_questions["question_id"]), MAX
+                    )
+                )
             else:
-                self.selected_questions.extend(self.ground_truth_questions["question_id"][:MAX])
+                self.selected_questions.extend(
+                    self.ground_truth_questions["question_id"][:MAX]
+                )
 
-    def is_valid_context(self,qid):
+    def is_valid_context(self, qid):
         qid_indexes = self.ground_truth_questions["question_id"] == qid
-        support_text : str
+        support_text: str
         support_text = self.ground_truth_questions["support"][qid_indexes].values[0]
-        if support_text is None or support_text == "" or len(support_text) == 0 or support_text.lower() == "nan":
+        if (
+            support_text is None
+            or support_text == ""
+            or len(support_text) == 0
+            or support_text.lower() == "nan"
+        ):
             return False
         return True
 
-    def report(self,qid,pid,mid,first_time = False):
+    def report(self, qid, pid, mid, first_time=False):
         data_file = None
         csv_writer = None
         # headers to the CSV file
         out_filename = self.statistics.RESULTS_FILENAME
         if first_time:
-            data_file = open(out_filename, 'w', newline='', encoding='utf-8')
+            data_file = open(out_filename, "w", newline="", encoding="utf-8")
             csv_writer = csv.writer(data_file, quoting=csv.QUOTE_NONNUMERIC)
             csv_writer.writerow(
-            ['question_id', 'prompt_id', 'model_id', 'question', 'correct_answer', 'distractor1', 'distractor2', 'distractor3', 'support']+self.metrics.get_available_metrics())
+                [
+                    "question_id",
+                    "prompt_id",
+                    "model_id",
+                    "question",
+                    "correct_answer",
+                    "distractor1",
+                    "distractor2",
+                    "distractor3",
+                    "support",
+                ]
+                + self.metrics.get_available_metrics()
+            )
         else:
-            data_file = open(out_filename, 'a', newline='', encoding='utf-8')
+            data_file = open(out_filename, "a", newline="", encoding="utf-8")
             csv_writer = csv.writer(data_file, quoting=csv.QUOTE_NONNUMERIC)
-        qid_row = self.generated_questions.loc[(self.generated_questions["question_id"] == qid) &
-                                               (self.generated_questions["prompt_id"] == pid.name) &
-                                               (self.generated_questions["model_id"] == mid),:]
+        qid_row = self.generated_questions.loc[
+            (self.generated_questions["question_id"] == qid)
+            & (self.generated_questions["prompt_id"] == pid.name)
+            & (self.generated_questions["model_id"] == mid),
+            :,
+        ]
         csv_writer.writerow(qid_row.values[0])
         data_file.flush()
         data_file.close()
 
-
-    def run_per_qid(self,prompt_ids=PromptID.all(),model_ids=[],new_file=True):
-        for mid in model_ids: # running the same model is more efficient
+    def run_per_qid(self, prompt_ids=PromptID.all(), model_ids=[], new_file=True):
+        for mid in model_ids:  # running the same model is more efficient
             for qid in self.selected_questions:
                 if not self.is_valid_context(qid):
                     continue
                 for pid in prompt_ids:
-                    self.generate_prompts(qid,pid)
-                    self.execute(qid,pid,mid)
-                    self.report(qid,pid,mid,new_file)
+                    self.generate_prompts(qid, pid)
+                    self.execute(qid, pid, mid)
+                    self.report(qid, pid, mid, new_file)
                     new_file = False
         self.statistics.clean_generated_questions()
         self.statistics.generate_summary()
@@ -306,7 +392,6 @@ class LLMsForEduQG:
         print("Cold Models: {}".format(self.llm_service.cold_models))
         print()
         print("Unsupported Models: {}".format(self.llm_service.error_models))
-
 
 
 -----
@@ -441,92 +526,21 @@ LLM_Service.py
 -----
 import os
 
-from openai import OpenAI
-import requests
 from langchain_core.output_parsers import PydanticOutputParser
-from pydantic import ValidationError
-from transformers import pipeline
-import torch
 from MultipleChoiceQuestion import MultipleChoiceQuestion
-from huggingface_hub import InferenceClient
+from openai import OpenAI
+from pydantic import ValidationError
+
 
 class LLM_Service:
-
-    TIMEOUT = 120 # in seconds
+    TIMEOUT = 120  # in seconds
 
     # key : model
     supported_models = {
-        # DeepSeek
-        'DeepSeekR1Qwen32': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
-        ##cold models
-        'DeepSeekR1': 'deepseek-ai/DeepSeek-R1',
-        'DeepSeekR1Qwen15': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B',
-        'DeepSeekR1Qwen7': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
-        'DeepSeekR1Qwen14': 'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B',
-        'DeepSeekR1Llama70': 'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
-        'DeepSeekR1Llama8': 'deepseek-ai/DeepSeek-R1-Distill-Llama-8B',
-        # HuggingFace Llama
-        'Llama3370Instruct': 'meta-llama/Llama-3.3-70B-Instruct',
-        'Llama321Instruct': 'meta-llama/Llama-3.2-1B-Instruct',
-        'Llama321': 'meta-llama/Llama-3.2-1B',
-        'Llama323Instruct': 'meta-llama/Llama-3.2-3B-Instruct',
-        'Llama323': 'meta-llama/Llama-3.2-3B',
-        'Llama31405Instruct': 'meta-llama/Meta-Llama-3.1-405B-Instruct',
-        'Llama31405': 'meta-llama/Meta-Llama-3.1-405B',
-        'Llama3170Instruct': 'meta-llama/Meta-Llama-3.1-70B-Instruct',
-        'Llama3170': 'meta-llama/Meta-Llama-3.1-70B',
-        'Llama318Instruct': 'meta-llama/Meta-Llama-3.1-8B-Instruct',
-        'Llama318': 'meta-llama/Meta-Llama-3.1-8B',
-        'Llama370Instruct': 'meta-llama/Meta-Llama-3-70B-Instruct',
-        'Llama370': 'meta-llama/Meta-Llama-3-70B',
-        'Llama38Instruct': 'meta-llama/Meta-Llama-3-8B-Instruct',
-        'Llama38': 'meta-llama/Meta-Llama-3-8B',
-        'Llama27': 'meta-llama/Llama-2-7b',
-        'Llama270': 'meta-llama/Llama-2-70b',
-        # HuggingFace FlanT5
-        'FlanT5Base': 'google/flan-t5-base',
-        'FlanT5Large': 'google/flan-t5-large',
-        'FlanT5Small': 'google/flan-t5-small',
-        'FlanT5XXL': 'google/flan-t5-xxl',
-        # HuggingFace MT5
-        'MT5Base': 'google/mt5-base',
-        'MT5Large': 'google/mt5-large',
-        'MT5Small': 'google/mt5-small',
-        'MT5XL': 'google/mt5-xl',
-        'MT5XXL': 'google/mt5-xxl',
-        # HuggingFace Gemma
-        'Gemma2BIT': 'google/gemma-2b-it',
-        # HuggingFace Mistral
-        'Mistral7B03Instruct': 'mistralai/Mistral-7B-Instruct-v0.3',
-        'Mistral7B03': 'mistralai/Mistral-7B-v0.3',
-        'Mistral7B02Instruct': 'mistralai/Mistral-7B-Instruct-v0.2',
-        'MistralSmallInstruct2409': 'mistralai/Mistral-Small-Instruct-2409',
-        'MistralLargeInstruct2407': 'mistralai/Mistral-Large-Instruct-2407',
-        'MistralNemoInstruct2407': 'mistralai/Mistral-Nemo-Instruct-2407',
-        'Mistral7B01': 'mistralai/Mistral-7B-v0.1',
-        'Mixtral8x7B01Instruct': 'mistralai/Mixtral-8x7B-Instruct-v0.1',
-        'Mixtral8x22B01Instruct': 'mistralai/Mixtral-8x22B-Instruct-v0.1',
-        'Mixtral8x7B01': 'mistralai/Mixtral-8x7B-v0.1',
-        'Mixtral8x22B01': 'mistralai/Mixtral-8x22B-v0.1',
-        # HuggingFace Falcon
-        'Falcon7BInstruct': 'tiiuae/falcon-7b-instruct',
-        'Falcon40BInstruct': 'tiiuae/falcon-40b-instruct',
-        'FalconMamba7BInstruct': 'tiiuae/falcon-mamba-7b-instruct',
-        'FalconMamba7B': 'tiiuae/falcon-mamba-7b',
-        # OpenAI's chat models
-        'GPT4o': 'gpt-4o',
-        'GPT4oMini': 'gpt-4o-mini',
-        'GPT5Nano': 'gpt-5-nano-2025-08-07',
-        'GPT5Mini': 'gpt-5-mini-2025-08-07',
-        # 'GPTo1Mini': 'o1-mini', # Tier 5 is required
-        'GPT4Turbo': 'gpt-4-turbo',
-        'GPT4': 'gpt-4',
-        'GPT35Turbo': 'gpt-3.5-turbo',
-        'GPT35TurboInstruct': 'gpt-3.5-turbo-instruct',
-        # 'GPT35Turbo0613': 'gpt-3.5-turbo-0613',  # snapshot June 13th 2023, deprecated June 13th 2024
-        'GPT35Turbo1106': 'gpt-3.5-turbo-1106',  # snapshot November 6th 2023
-        'GPT40613': 'gpt-4-0613',  # snapshot June 13th 2023
-    } # ["gpt-4o-mini", "meta-llama/Meta-Llama-3.1-70B-Instruct"]
+        "NEB_Llama3370Instruct": "meta-llama/Llama-3.3-70B-Instruct-fast",
+        "NEB_Qwen3235BInstruct": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "GPT5Mini": "gpt-5-mini-2025-08-07",
+    }
 
     def print_supported_llms(self):
         print("List of supported LLMs:")
@@ -534,26 +548,22 @@ class LLM_Service:
             print("{} : {}".format(llm, url))
 
     cold_models = []
-    # ['Llama31405Instruct', 'Llama27', 'Llama270', 'FlanT5Base', 'FlanT5XXL', 'MT5Base', 'MT5Large', 'MT5Small',
-    #  'Gemma2BIT', 'Mistral7B02Instruct']
     error_models = []
-     # ['Llama31405', 'Llama3170', 'Llama318', 'Llama370', 'Llama38', 'MT5XL', 'MT5XXL', 'Mistral7B03',
-     #         'MistralLargeInstruct2407', 'Mixtral8x22B01Instruct', 'Mixtral8x7B01', 'Mixtral8x22B01',
-     #         'Falcon40BInstruct', 'FalconMamba7BInstruct', 'FalconMamba7B']
     timeout_models = []
 
     gpt_client = OpenAI(
-        # This is the default and can be omitted
         api_key=os.environ.get("OPENAI_API_KEY"),
     )
 
-    hf_api_key = os.environ.get("API_KEY_HUGGINGFACE")
+    nebius_client = OpenAI(
+        base_url="https://api.tokenfactory.nebius.com/v1/",
+        api_key=os.environ.get("NEBIUS_API_KEY"),
+    )
 
     def get_all_models(self):
         return list(self.supported_models.keys())
 
-
-    def get_model_url(self,model_id:str):
+    def get_model_url(self, model_id: str):
         for key in self.supported_models.keys():
             if key.upper() == model_id.upper():
                 return self.supported_models.get(key)
@@ -566,24 +576,18 @@ class LLM_Service:
                 model_ids.append(key)
         return model_ids
 
-    def execute_prompt(self, model_id, prompt:str):
+    def execute_prompt(self, model_id, prompt: str):
         response = None
-        # avoid calling models currently cold/unsupported in HF or OPENAI
-        # if model_id not in self.cold_models and model_id not in self.unsupported_models:
-            # print("Running Model:{}".format(model_id))
-        if model_id == "GPT35TurboInstruct":
-            response = self.gpt_old_execute_prompt(model_id, prompt)
-        elif model_id.startswith('GPT'):
-            response = self.gpt_execute_prompt(model_id,prompt)
-        elif model_id.startswith('Llama32'):
-            response = self.hf_execute_prompt_Llama32(model_id,prompt)
-        else:  # use model from HF
-            response = self.hf_execute_prompt(model_id,prompt)
-        # else:
-        #     print("Model Skipped:{}".format(model_id))
+
+        if model_id.startswith("GPT"):
+            response = self.gpt_execute_prompt(model_id, prompt)
+        elif model_id.startswith("NEB_"):
+            response = self.nebius_execute_prompt(model_id, prompt)
+        else:
+            print("Model Skipped:{}".format(model_id))
         return response
 
-    def gpt_execute_prompt(self, model_id="GPT4oMini",prompt=""):
+    def gpt_execute_prompt(self, model_id="GPT5Mini", prompt=""):
         model_url = self.get_model_url(model_id)
         if model_url == "":
             model_url = self.get_model_url("GPT4oMini")
@@ -592,7 +596,9 @@ class LLM_Service:
         format_instructions = parser.get_format_instructions()
         try:
             messages = [{"role": "user", "content": prompt + format_instructions}]
-            completion = self.gpt_client.chat.completions.create(model=model_url, messages=messages)
+            completion = self.gpt_client.chat.completions.create(
+                model=model_url, messages=messages
+            )
             gpt_response = completion.choices[0].message
             if gpt_response.refusal:
                 print("gpt_execute_prompt:gpt_response.refusal: ", gpt_response.refusal)
@@ -607,121 +613,49 @@ class LLM_Service:
             print("gpt_execute_prompt: general exception: ", exc)
             return None
 
-    def gpt_old_execute_prompt(self, model_id="GPT35TurboInstruct",prompt=""):
+    def nebius_execute_prompt(self, model_id, prompt: str):
         model_url = self.get_model_url(model_id)
         if model_url == "":
-            model_url = self.get_model_url("GPT35TurboInstruct")
+            return None
 
         parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
         format_instructions = parser.get_format_instructions()
         try:
-            messages = prompt + format_instructions
-            completion = self.gpt_client.completions.create(model=model_url, prompt=messages)
-            gpt_response = completion.choices[0].text
-
-            if 'error' in gpt_response:
-                print("gpt_execute_prompt:gpt_response.refusal: ", gpt_response)
-                return None
-            else:
-                parsed_mc_question = parser.invoke(gpt_response)
-                return parsed_mc_question
-        except ValidationError as err:
-            print("gpt_execute_prompt:ValidationError: ", err)
-            return None
-        except Exception as exc:
-            print("gpt_execute_prompt: general exception: ", exc)
-            return None
-
-    def hf_execute_prompt(self, model_id, prompt: str):
-        model_url = self.get_model_url(model_id)
-        if model_url == "":
-            model_url = self.get_model_url("Llama3170Instruct")
-
-        headers = {"Authorization": f"Bearer {self.hf_api_key}"} # "x-wait-for-model": "true"
-        API_URL = f"https://router.huggingface.co/models/{model_url}"
-        parameters = {}
-        if (not model_id.startswith("Flan")) and (not model_id.startswith("MT5")):
-            parameters['return_full_text'] = False
-        parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
-        format_instructions = parser.get_format_instructions()
-
-        payload = {"inputs": prompt + format_instructions, "parameters": parameters}
-        try:
-            response = requests.post(API_URL, headers=headers, json=payload)
-
-            # if not response.ok and response.status_code == 503: # model is cold. wait until model is loaded
-            #     print("Cold Model: {}".format(response.text))
-            #     print("Re-trying...")
-            #     headers = {"Authorization": f"Bearer {self.hf_api_key}", "x-wait-for-model": "true"}
-            #     response = requests.post(API_URL, headers=headers, json=payload, timeout=self.TIMEOUT)
-
-            if not response.ok:
-                if response.status_code == 503: # model remains cold
-                    self.cold_models.append(model_id)
-                elif response.status_code == 504: # model timeout
-                    self.timeout_models.append(model_id)
-                elif response.status_code == 429: # Rate limit reached.
-                    print('hf_execute_prompt: Rate limit reached' + response.text)
-                    return "error=429"
-                else: # response.status_code == 403 or 400: # error model
-                    self.error_models.append(model_id)
-                print('hf_execute_prompt: not response.ok' + response.text)
+            messages = [{"role": "user", "content": prompt + format_instructions}]
+            completion = self.nebius_client.chat.completions.create(
+                model=model_url, messages=messages
+            )
+            response = completion.choices[0].message
+            if hasattr(response, "refusal") and response.refusal:
+                print("nebius_execute_prompt: refusal: ", response.refusal)
                 return None
 
-            generated_text = response.json()[0]['generated_text']
-            # if 'error' in generated_text:
-            #     print('hf_execute_prompt: ERROR: ' + generated_text['error'])
-            #     return None
+            content = response.content
+            # stripping deepseek R1 thinking tokens
+            if "<think>" in content:
+                content = content.split("</think>")[-1].strip()
 
-            parsed_mc_question = parser.invoke(generated_text)
+            parsed_mc_question = parser.invoke(content)
             return parsed_mc_question
         except ValidationError as err:
-            print ("hf_execute_prompt:ValidationError: ",err)
+            print("nebius_execute_prompt: ValidationError: ", err)
             return None
         except Exception as exc:
-            print("hf_execute_prompt: general exception: ",exc)
+            if "429" in str(exc):
+                print("nebius_execute_prompt: rate limit reached")
+                return "error=429"
+            print("nebius_execute_prompt: general exception: ", exc)
             return None
-
-
-    def hf_execute_prompt_Llama32(self, model_id, prompt: str):
-        model_url = self.get_model_url(model_id)
-        if model_url == "":
-            model_url = self.get_model_url("Llama321Instruct")
-
-        parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
-        format_instructions = parser.get_format_instructions()
-        try:
-            client = InferenceClient(
-                model_url,
-                token=self.hf_api_key,
-            )
-            messages = [{"role": "user", "content": prompt + format_instructions}]
-            completion = client.chat.completions.create(
-                model=model_url,
-                messages=messages
-            )
-            generated_text = completion.choices[0].message.content
-            if "error" in generated_text:
-                print("hf_llama32: error: ", generated_text)
-                return None
-            else:
-                parsed_mc_question = parser.invoke(generated_text)
-                return parsed_mc_question
-        except ValidationError as err:
-            print("hf_llama32:ValidationError: ", err)
-            return None
-        except Exception as exc:
-            print("hf_llama32: general exception: ", exc)
-            return None
-
 
 
 -----
 Utils.py
 -----
 import pandas as pd
+from Statistics import Statistics
+from Metrics import Metrics
 
-def main():
+def sample_questions():
     try: 
         data = pd.read_csv("/Users/miriam/projects/LLMsForEduQG/datasets/SciQ_valid.csv").sample(frac=0.1, random_state=42)
         data.to_csv("/Users/miriam/projects/LLMsForEduQG/datasets/SciQ_100_valid.csv")
@@ -730,8 +664,35 @@ def main():
     finally:
         print("Saved the sampled data at: /Users/miriam/projects/LLMsForEduQG/datasets/SciQ_100_valid.csv")
     
+
+def combine_results_ex_order():
+    try:
+        df_default = pd.read_csv("/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/GPT5Mini-FewShot/clean_generated_questions.csv")
+        df_random = pd.read_csv("/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/GPT5Mini-FewShot_Random/clean_generated_questions.csv")
+        df_reverse = pd.read_csv("/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/GPT5Mini-FewShot_Reverse/clean_generated_questions.csv")
+
+        combined = pd.concat([df_default, df_random, df_reverse], ignore_index=True)
+        combined.to_csv("/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/generated_questions.csv", index=False, quoting=1)
+    except Exception as e:
+        print(f"Ran into this following problem: {e}")
+
+
+def get_combined_stats_ex_order():
+    metrics = Metrics()
+    results_dir = "/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/"
+    input_filename = "/Users/miriam/projects/LLMsForEduQG/LLMsForEduQG/results_prompt_modes/combined_prompt_modes_results.csv"
+    stats = Statistics(input_filename, results_dir, metrics)
+
+    stats.clean_generated_questions()
+    stats.generate_summary()
+    stats.compute_statistics()
+    stats.generate_plots()
+
+    print("Done! Check rresults_prompt_modes")
+
 if __name__ == "__main__":
-    main()
+    combine_results_ex_order()
+    get_combined_stats_ex_order()
 
 # TODO: merge the results of all modes and evaluate the winner score by score
 
@@ -1022,20 +983,25 @@ class Statistics:
 -----
 Prompt.py
 -----
-""""
+""" "
 This file handles the creation of user prompts in different formats: Simple, Simple_plus_Answer, and FewShot, which includes examples retrieved through RAG.
 """
 
-from enum import Enum
-from typing import List, Dict, Any
 import random
+from enum import Enum
+from typing import Any, Dict, List
+
 
 class PromptID(Enum):
     Simple = 0
     Simple_plus_Answer = 1
     FewShot = 2
-    FewShot_Reverse = 3
+    FewShot_Reverse = (
+        3  # full prompt (support text, answer, and examples in reversed order)
+    )
     FewShot_Random = 4
+    FewShot_Reverse_NoContext = 5
+    FewShot_Reverse_NoAnswer = 6
 
     @classmethod
     def all(self):
@@ -1047,13 +1013,12 @@ class PromptID(Enum):
         for p in self.all():
             print("{} : {}".format(p.name, p))
 
-class Prompt:
 
+class Prompt:
     id: PromptID
     prompt: str
     gt_question: Dict[str, Any]
     examples: List[Dict]
-
 
     def __init__(self, id=PromptID.Simple, question=None, examples=None):
         self.id = id
@@ -1074,40 +1039,84 @@ class Prompt:
         # Small Generative Language Models for Educational Question Generation
         # NeurIPS 2023 Workshop on Generative AI for Education (GAIED).
         if self.id == PromptID.Simple:
-            self.prompt = ("Given support text \"%s\", create 1 expert level question with multiple choice answer from the text. "
-                  "Please also include the correct answer and 3 distractors. ") % (support_text)
+            self.prompt = (
+                'Given support text "%s", create 1 expert level question with multiple choice answer from the text. '
+                "Please, also include the correct answer and 3 distractors. "
+            ) % (support_text)
         elif self.id == PromptID.Simple_plus_Answer:
-                self.prompt = ("Given support text \"%s\", create 1 expert level question with multiple choice answer from the text, "
-              "for which the correct answer is \"%s\". Please, also create 3 distractors.") % (support_text,expected_answer)
-        elif self.id in [PromptID.FewShot, PromptID.FewShot_Reverse, PromptID.FewShot_Random]:
+            self.prompt = (
+                'Given support text "%s", create 1 expert level question '
+                "with multiple choice answer from the text, "
+                'for which the correct answer is "%s". '
+                "Please, also create 3 distractors."
+            ) % (support_text, expected_answer)
+        elif self.id in [
+            PromptID.FewShot,
+            PromptID.FewShot_Reverse,
+            PromptID.FewShot_Random,
+        ]:
             self.ordered_examples = self.examples[:]
 
             if self.id == PromptID.FewShot_Reverse:
                 self.ordered_examples.reverse()  # Least Similar first
             elif self.id == PromptID.FewShot_Random:
-                random.shuffle(self.ordered_examples)  
-            
+                random.shuffle(self.ordered_examples)
+
             examples_str = ""
             for i, ex in enumerate(self.ordered_examples):
                 # add mechanims to change order of the examples here
                 # like, there should be 3 configurations: most similar first, least similar first, and random
                 examples_str += (
-                    f"Example {i+1}:\n"
-                    f"Support Text: \"{ex['support']}\"\n"
+                    f"Example {i + 1}:\n"
+                    f'Support Text: "{ex["support"]}"\n'
                     f"Question: {ex['question']}\n"
                     f"Correct Answer: {ex['correct_answer']}\n"
                     f"Distractors: {', '.join(ex['distractors'])}\n\n"
                 )
             self.prompt = (
-                f"Given support text \"{support_text}\", create 1 expert level question with multiple choice answer from the text. "
-                "Please also include the correct answer and 3 distractors. "
+                f'Given support text "{support_text}", create 1 expert level question with multiple choice answer from the text. '
+                "Please, also include the correct answer and 3 distractors. "
                 "Use the following examples as a guide. \n\n"
                 f"{examples_str}"
             )
+        elif self.id == PromptID.FewShot_Reverse_NoContext:
+            self.ordered_examples = self.examples[:]
+            self.ordered_examples.reverse()
 
+            examples_str = ""
+            for i, ex in enumerate(self.ordered_examples):
+                examples_str += (
+                    f"Example {i + 1}:\n"
+                    f"Question: {ex['question']}\n"
+                    f"Correct Answer: {ex['correct_answer']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                "Create 1 expert level question with multiple choice answer. "
+                "Please, also create the correct answer and 3 distractors. "
+                "Use the following examples as a guide.\n\n"
+                f"{examples_str}"
+            )
 
+        elif self.id == PromptID.FewShot_Reverse_NoAnswer:
+            self.ordered_examples = self.examples[:]
+            self.ordered_examples.reverse()
 
-
+            examples_str = ""
+            for i, ex in enumerate(self.ordered_examples):
+                examples_str += (
+                    f"Example {i + 1}:\n"
+                    f'Support Text: "{ex["support"]}"\n'
+                    f"Question: {ex['question']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                f'Given support text "{support_text}", create 1 expert level question '
+                "with multiple choice answer from the text. "
+                "Please, also create the correct answer and 3 distractors. "
+                "Use the following examples as a guide.\n\n"
+                f"{examples_str}"
+            )
 
 
 -----

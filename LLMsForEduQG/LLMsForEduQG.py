@@ -86,8 +86,9 @@ class LLMsForEduQG:
             PromptID.FewShot,
             PromptID.FewShot_Reverse,
             PromptID.FewShot_Random,
-            PromptID.FewShot_Reverse_NoContext,
-            PromptID.FewShot_Reverse_NoAnswer,
+            PromptID.FewShot_NoContext,
+            PromptID.FewShot_NoContext_WithAnswer,
+            PromptID.FewShot_NoAnswer
         ]:
             # using the current question's support text as the query to find 3 similar texts in the datastore
             examples = self.rag_service.retrieve_examples(

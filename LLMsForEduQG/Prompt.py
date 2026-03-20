@@ -10,13 +10,18 @@ from typing import Any, Dict, List
 class PromptID(Enum):
     Simple = 0
     Simple_plus_Answer = 1
+
+    # example ordering prompts
     FewShot = 2
     FewShot_Reverse = (
         3  # full prompt (support text, answer, and examples in reversed order)
     )
     FewShot_Random = 4
-    FewShot_Reverse_NoContext = 5
-    FewShot_Reverse_NoAnswer = 6
+
+    # ablation study prompts
+    FewShot_NoContext = 5  # from the example-order experiments it turns out that putting the most relevant example first is better. Now we use this order for the ablation study checking which parts of the prompt are required.
+    FewShot_NoContext_WithAnswer = 6
+    FewShot_NoAnswer = 7
 
     @classmethod
     def all(self):
@@ -56,14 +61,14 @@ class Prompt:
         if self.id == PromptID.Simple:
             self.prompt = (
                 'Given support text "%s", create 1 expert level question with multiple choice answer from the text. '
-                "Please also include the correct answer and 3 distractors. "
+                "Please, also create the correct answer and 3 distractors. "
             ) % (support_text)
         elif self.id == PromptID.Simple_plus_Answer:
             self.prompt = (
                 'Given support text "%s", create 1 expert level question '
                 "with multiple choice answer from the text, "
                 'for which the correct answer is "%s". '
-                "Please also include 3 distractors."
+                "Please, also create 3 distractors."
             ) % (support_text, expected_answer)
         elif self.id in [
             PromptID.FewShot,
@@ -90,13 +95,12 @@ class Prompt:
                 )
             self.prompt = (
                 f'Given support text "{support_text}", create 1 expert level question with multiple choice answer from the text. '
-                "Please also include the correct answer and 3 distractors. "
+                "Please, also create the correct answer and 3 distractors. "
                 "Use the following examples as a guide. \n\n"
                 f"{examples_str}"
             )
-        elif self.id == PromptID.FewShot_Reverse_NoContext:
+        elif self.id == PromptID.FewShot_NoContext:
             self.ordered_examples = self.examples[:]
-            self.ordered_examples.reverse()
 
             examples_str = ""
             for i, ex in enumerate(self.ordered_examples):
@@ -113,9 +117,26 @@ class Prompt:
                 f"{examples_str}"
             )
 
-        elif self.id == PromptID.FewShot_Reverse_NoAnswer:
+        elif self.id == PromptID.FewShot_NoContext_WithAnswer:
             self.ordered_examples = self.examples[:]
-            self.ordered_examples.reverse()
+
+            examples_str = ""
+            for i, ex in enumerate(self.ordered_examples):
+                examples_str += (
+                    f"Example {i + 1}:\n"
+                    f"Question: {ex['question']}\n"
+                    f"Correct Answer: {ex['correct_answer']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                "Create 1 expert level question with multiple choice answer "
+                f'for which the correct answer is "{expected_answer}" .'
+                "Please, also create 3 distractors. "
+                "Use the following examples as a guide.\n\n"
+                f"{examples_str}"
+            )
+        elif self.id == PromptID.FewShot_NoAnswer:
+            self.ordered_examples = self.examples[:]
 
             examples_str = ""
             for i, ex in enumerate(self.ordered_examples):
