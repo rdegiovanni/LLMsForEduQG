@@ -41,4 +41,3 @@ if __name__ == "__main__":
     combine_results_ex_order()
     get_combined_stats_ex_order()
 
-# TODO: merge the results of all modes and evaluate the winner score by score

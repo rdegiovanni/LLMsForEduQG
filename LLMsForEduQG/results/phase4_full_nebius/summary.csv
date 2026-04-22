@@ -1,0 +1,4 @@
+prompt_id,model_id,bleu_1,bleu_2,bleu_3,bleu_4,f1,ppl_scores,divs,grammer,num_gen_questions,success_ratio
+FewShot,NEB_Llama3370Instruct,0.3649,0.2793,0.2412,0.2175,0.4037,7.2896,0.8300,0.0000,887,1.0000
+FewShot,NEB_Qwen3235BInstruct,0.2436,0.1578,0.1244,0.1074,0.2516,7.7831,0.8775,0.0000,887,1.0000
+FewShot,NEB_DeepSeekV32,0.2112,0.1328,0.1041,0.0896,0.2296,8.9909,0.8971,0.0000,883,0.9955

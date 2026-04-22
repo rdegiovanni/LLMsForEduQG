@@ -1,0 +1,302 @@
+Namespace(input_filename='datasets/SciQ_100_valid.csv', results_dir='results_prompt_modes/GPT5Mini-FewShot_Random', MAX=0, random_choice=False, models_list=['GPT5Mini'], models_prefix=None, prompts_list=['FewShot_Random'], list_llms=False, list_prompts=False)
+Initializing RAG Service with data from: datasets/SciQ_100_valid.csv
+Ingesting data into ChromaDB...
+Successfully ingested 89 documents.
+Running QID: 11689, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11702, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11709, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11718, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11733, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11738, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11742, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11745, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11746, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11749, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11767, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11775, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11815, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11818, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11853, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11877, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11888, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11889, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11897, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11914, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11940, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11954, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11956, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11959, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11968, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11971, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11975, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11978, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11986, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11991, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11997, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 11998, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12006, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12007, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12050, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12061, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12090, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12115, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12118, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12130, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12192, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12200, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12201, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12206, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12221, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12222, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12227, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12228, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12263, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12268, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12269, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12280, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12283, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12296, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12300, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12305, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12315, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12331, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12339, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12341, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12357, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12358, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12366, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12371, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12393, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12416, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12419, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12432, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12440, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12443, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12466, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12490, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12499, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12505, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12516, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12538, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12545, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12558, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12562, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12578, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12580, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12581, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12603, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12617, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12626, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12652, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12653, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12665, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+Running QID: 12677, PID: PromptID.FewShot_Random, MID: GPT5Mini.
+>>>
+>>>
+summary: PID: FewShot_Random, MID: GPT5Mini
+Metric: bleu_1
+>>>
+>>>
+Metric: bleu_2
+>>>
+>>>
+Metric: bleu_3
+>>>
+>>>
+Metric: bleu_4
+>>>
+>>>
+Metric: f1
+>>>
+>>>
+Metric: ppl_scores
+>>>
+>>>
+Metric: divs
+>>>
+>>>
+Metric: grammer
+>>>
+>>>
+
+
+>>>>
+Cold Models: []
+
+Unsupported Models: []

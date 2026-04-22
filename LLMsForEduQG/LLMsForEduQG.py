@@ -1,6 +1,7 @@
 import csv
 import json
 import random
+import os
 
 import numpy as np
 import pandas as pd
@@ -59,6 +60,30 @@ class LLMsForEduQG:
 
         self.load_testing_data(input_filename, MAX, random_choice)
 
+    def _prepare_checkpoint(self, retry_errors=True):
+        """Return set of (qid, pid_name, mid) tuples already successfully saved."""
+        out_filename = self.statistics.RESULTS_FILENAME
+        if not os.path.exists(out_filename):
+            return set()
+
+        try:
+            df = pd.read_csv(out_filename, keep_default_na=False)
+        except Exception as e:
+            print(f"Checkpoint unreadable ({e}). Starting fresh.")
+            return set()
+
+        if retry_errors:
+            is_failed = (df["question"] == "") | (df["question"] == "error=429")
+            n_failed = int(is_failed.sum())
+            if n_failed > 0:
+                df = df[~is_failed]
+                df.to_csv(out_filename, index=False, quoting=csv.QUOTE_NONNUMERIC)
+                print(f"Checkpoint: dropped {n_failed} failed rows for retry.")
+
+        completed = set(zip(df["question_id"], df["prompt_id"], df["model_id"]))
+        print(f"Checkpoint: skipping {len(completed)} already-done triples.")
+        return completed
+    
     # It takes the question ID (qid) from the dataset, and the prompt id (pid)
     def generate_prompts(self, qid, pid):
 
@@ -237,24 +262,33 @@ class LLMsForEduQG:
         data_file.flush()
         data_file.close()
 
-    def run_per_qid(self, prompt_ids=PromptID.all(), model_ids=[], new_file=True):
-        for mid in model_ids:  # running the same model is more efficient
+    def run_per_qid(self, prompt_ids=PromptID.all(), model_ids=[], new_file=True, resume=True):
+        out_filename = self.statistics.RESULTS_FILENAME
+
+        if resume and os.path.exists(out_filename):
+            completed = self._prepare_checkpoint(retry_errors=True)
+            write_header = False           
+        else:
+            completed = set()
+            write_header = True            
+
+        for mid in model_ids:
             for qid in self.selected_questions:
                 if not self.is_valid_context(qid):
                     continue
                 for pid in prompt_ids:
+                    if (qid, pid.name, mid) in completed:
+                        continue          
                     self.generate_prompts(qid, pid)
                     self.execute(qid, pid, mid)
-                    self.report(qid, pid, mid, new_file)
-                    new_file = False
+                    self.report(qid, pid, mid, write_header)
+                    write_header = False
+
         self.statistics.clean_generated_questions()
         self.statistics.generate_summary()
         self.statistics.compute_statistics()
         self.statistics.generate_plots()
 
-        print()
-        print()
         print(">>>>")
         print("Cold Models: {}".format(self.llm_service.cold_models))
-        print()
         print("Unsupported Models: {}".format(self.llm_service.error_models))
