@@ -135,6 +135,7 @@ class LLMsForEduQG:
             if prompt.id is not pid:
                 continue
             print("Running QID: {}, PID: {}, MID: {}.".format(qid, prompt.id, mid))
+            retrieved_examples = prompt.retrieved_examples
             response = self.llm_service.execute_prompt(mid, prompt.prompt)
             if response is None:
                 answer_result = {
@@ -173,8 +174,10 @@ class LLMsForEduQG:
                     ignore_index=True,
                 )
             else:
+                support_text = self.ground_truth_questions["support"][qid_indexes].values[0]
                 answer_scores = self.metrics.compute_scores(
-                    response.question, expected_question
+                    response.question, expected_question, support_text,
+                    examples=retrieved_examples
                 )
                 answer_result = {
                     "question_id": qid,

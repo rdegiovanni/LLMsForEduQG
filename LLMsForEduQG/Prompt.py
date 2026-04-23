@@ -44,6 +44,7 @@ class Prompt:
         self.id = id
         self.gt_question = question
         self.examples = examples if examples else []
+        self.retrieved_examples = self.examples
         self.instantiate_prompt_template()
 
     # generate prompt templates
