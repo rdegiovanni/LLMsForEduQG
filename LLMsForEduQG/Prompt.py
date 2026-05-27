@@ -12,8 +12,10 @@ from typing import Any, Dict, List
 class PromptID(Enum):
     ZeroShot = 0
     ZeroShot_WithAnswer = 1
-    FewShot = 2
-    FewShot_WithAnswer = 3
+    FewShot = 2              # most-similar-first
+    FewShot_WithAnswer = 3   # most-similar-first, correct answer in prompt
+    FewShot_Reverse = 4      # least-similar-first
+    FewShot_MostSimMiddle = 5  # most-similar in centre position
 
     @classmethod
     def all(cls):
@@ -60,7 +62,7 @@ class Prompt:
 
         elif self.id == PromptID.FewShot:
             examples_str = ""
-            for i, ex in enumerate(self.examples):   # most-similar-first (default RAG order)
+            for i, ex in enumerate(self.examples):  # most-similar-first (default RAG order)
                 examples_str += (
                     f"Example {i + 1}:\n"
                     f'Support Text: "{ex["support"]}"\n'
@@ -77,7 +79,7 @@ class Prompt:
 
         elif self.id == PromptID.FewShot_WithAnswer:
             examples_str = ""
-            for i, ex in enumerate(self.examples):   # most-similar-first (default RAG order)
+            for i, ex in enumerate(self.examples):  # most-similar-first (default RAG order)
                 examples_str += (
                     f"Example {i + 1}:\n"
                     f'Support Text: "{ex["support"]}"\n'
@@ -90,6 +92,47 @@ class Prompt:
                 f'with multiple choice answer from the text, '
                 f'for which the correct answer is "{expected_answer}". '
                 f'Please, also create 3 distractors. '
+                f'Use the following examples as a guide.\n\n'
+                f'{examples_str}'
+            )
+
+        elif self.id == PromptID.FewShot_Reverse:
+            ordered = self.examples[:]
+            ordered.reverse()  # least-similar-first
+
+            examples_str = ""
+            for i, ex in enumerate(ordered):
+                examples_str += (
+                    f"Example {i + 1}:\n"
+                    f'Support Text: "{ex["support"]}"\n'
+                    f"Question: {ex['question']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                f'Given support text "{support_text}", create 1 expert level question '
+                f'with multiple choice answer from the text. '
+                f'Please, also create the correct answer and 3 distractors. '
+                f'Use the following examples as a guide.\n\n'
+                f'{examples_str}'
+            )
+
+        elif self.id == PromptID.FewShot_MostSimMiddle:
+            ordered = self.examples[:]
+            if len(ordered) == 3:
+                ordered = [ordered[1], ordered[0], ordered[2]]  # [2nd, 1st, 3rd]
+
+            examples_str = ""
+            for i, ex in enumerate(ordered):
+                examples_str += (
+                    f"Example {i + 1}:\n"
+                    f'Support Text: "{ex["support"]}"\n'
+                    f"Question: {ex['question']}\n"
+                    f"Distractors: {', '.join(ex['distractors'])}\n\n"
+                )
+            self.prompt = (
+                f'Given support text "{support_text}", create 1 expert level question '
+                f'with multiple choice answer from the text. '
+                f'Please, also create the correct answer and 3 distractors. '
                 f'Use the following examples as a guide.\n\n'
                 f'{examples_str}'
             )

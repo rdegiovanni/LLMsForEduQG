@@ -1,0 +1,4 @@
+prompt_id,model_id,bleu_1,bleu_2,bleu_3,bleu_4,f1,ppl_scores,divs,grammer,copy_ratio_support,copy_ratio_reference,copy_ratio_examples,num_gen_questions,success_ratio
+FewShot_WithAnswer,NEB_Llama3370Instruct,0.5089,0.4259,0.3783,0.3449,0.5915,9.1429,0.8377,0.0000,0.4479,0.3883,0.0467,882,0.9977
+FewShot_WithAnswer,NEB_DeepSeekV32,0.2793,0.1923,0.1497,0.1256,0.3392,8.6999,0.9114,0.0000,0.1597,0.1305,0.0224,884,1.0000
+FewShot_WithAnswer,GPT5Mini,0.2697,0.1931,0.1529,0.1284,0.3275,10.6412,0.9150,0.0000,0.1758,0.1338,0.0179,884,1.0000
