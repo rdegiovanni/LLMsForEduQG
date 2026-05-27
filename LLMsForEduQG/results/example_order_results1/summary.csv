@@ -1,4 +1,0 @@
-prompt_id,model_id,bleu_1,bleu_2,bleu_3,bleu_4,f1,ppl_scores,divs,grammer,num_gen_questions,success_ratio
-FewShot,GPT5Mini,0.2370,0.1573,0.1248,0.1053,0.2545,11.7269,0.8799,0.0000,89,1.0000
-FewShot_Reverse,GPT5Mini,0.2256,0.1513,0.1208,0.1030,0.2305,11.9646,0.8714,0.0000,89,1.0000
-FewShot_Random,GPT5Mini,0.2248,0.1547,0.1258,0.1089,0.2467,14.7356,0.8739,0.0000,89,1.0000

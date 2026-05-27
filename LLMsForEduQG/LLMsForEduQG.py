@@ -35,13 +35,14 @@ class LLMsForEduQG:
     prompts = pd.DataFrame(columns=["question_id", "prompt"])
     generated_questions = None
 
-    def __init__(self, input_filename, results_dir, MAX=0, random_choice=False):
+    def __init__(self, input_filename, results_dir, MAX=0, random_choice=False, rag_data_path=None):
 
         self.metrics = Metrics()
         self.statistics = Statistics(input_filename, results_dir, self.metrics)
         self.llm_service = LLM_Service()
 
-        self.rag_service = RAG_Service(data_path=input_filename)
+        rag_path = rag_data_path if rag_data_path is not None else input_filename
+        self.rag_service = RAG_Service(data_path=rag_path, similarity_threshold=0.3)
         # TODO: doubt, shouldn't we use a different input data to embed for RAG than the one we use to generate the examples?
         self.generated_questions = pd.DataFrame(
             columns=[
@@ -109,11 +110,7 @@ class LLMsForEduQG:
         examples = []
         if pid in [
             PromptID.FewShot,
-            PromptID.FewShot_Reverse,
-            PromptID.FewShot_Random,
-            PromptID.FewShot_NoContext,
-            PromptID.FewShot_NoContext_WithAnswer,
-            PromptID.FewShot_NoAnswer
+            PromptID.FewShot_WithAnswer
         ]:
             # using the current question's support text as the query to find 3 similar texts in the datastore
             examples = self.rag_service.retrieve_examples(

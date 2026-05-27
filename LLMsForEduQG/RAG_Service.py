@@ -9,12 +9,13 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
 
 class RAG_Service:
-    def __init__(self, data_path: str, collection_name: str = "sciq_examples"):
+    def __init__(self, data_path: str, collection_name: str = "sciq_examples", similarity_threshold=0.3):
         print(f"Initializing RAG Service with data from: {data_path}")
+        self.similarity_threshold = similarity_threshold # only examples with more than 70% similarity are used
         self.data_path = data_path
         self.embedding_model = SentenceTransformer("all-mpnet-base-v2")
         self.chroma_client = chromadb.Client()
-        self.collection = self.chroma_client.get_or_create_collection(name=collection_name)
+        self.collection = self.chroma_client.get_or_create_collection(name=collection_name, metadata={"hnsw:space": "cosine"})
 
         if self.collection.count() == 0:
             self._ingest_data()
@@ -34,7 +35,6 @@ class RAG_Service:
 
             for idx, row in df.iterrows():
                 documents.append(row["support"])
-# what about the question id? shouldn't we include it in the metadatas instead of ids? or how is this supposed to work. ie, how are ids integrated in all this?
                 metadatas.append({
                     "question_id": str(row.get("question_id", idx)),
                     "question": row["question"],
@@ -65,12 +65,16 @@ class RAG_Service:
 
         results = self.collection.query(
             query_embeddings=query_embedding,
-            n_results=n_results
+            n_results=n_results,
+            include=["documents", "metadatas", "distances"]
         )
 
         examples = []
         if results["documents"]:
             for i in range(len(results["documents"][0])):
+                distance = results["distances"][0][i]
+                if distance >= self.similarity_threshold:  # filtering out the examples that are not similar enough, therefore not relevant
+                    continue
                 doc = results["documents"][0][i]
                 meta = results["metadatas"][0][i]
 

@@ -95,7 +95,7 @@ class Metrics():
         return ['bleu_1', 'bleu_2', 'bleu_3', 'bleu_4', 'f1', 'ppl_scores', 'divs', 'grammer', 'copy_ratio_support', 'copy_ratio_reference', 'copy_ratio_examples'] #, 'stats', 'words', 'count']
 
 
-    def compute_scores(self,prediction,ground_truth, support_text):
+    def compute_scores(self,prediction,ground_truth, support_text, examples=None):
         results = {
             'f1': [], 'bleu_1': [], 'bleu_2': [], 'bleu_3': [], 'bleu_4': [], 'ppl_scores': [], 'divs': [],
             'grammer': [],

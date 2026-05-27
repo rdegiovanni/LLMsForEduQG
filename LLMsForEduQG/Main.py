@@ -40,7 +40,10 @@ if __name__ == '__main__':
     parser.add_argument('-pl', "--prompt-list", dest="list_prompts",
                         action='store_true', help="List the available prompts.")
 
-
+    parser.add_argument("--rag-data", dest="rag_data_path",
+                    default=None,
+                    help="CSV file to build the RAG datastore from.",
+                    metavar="RAG_DATA")
     args = parser.parse_args()
 
     print(args)
@@ -53,7 +56,8 @@ if __name__ == '__main__':
         LLMrunner = LLMsForEduQG(input_filename=args.input_filename,
                                  results_dir=args.results_dir,
                                  MAX=args.MAX,
-                                 random_choice=args.random_choice)
+                                 random_choice=args.random_choice,
+                                 rag_data_path=args.rag_data_path)
 
         if args.list_llms:
             LLMrunner.llm_service.print_supported_llms()
