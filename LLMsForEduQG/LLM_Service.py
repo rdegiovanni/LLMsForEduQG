@@ -13,9 +13,10 @@ class LLM_Service:
     supported_models = {
         "NEB_Llama3370Instruct": "meta-llama/Llama-3.3-70B-Instruct",
         "NEB_Qwen3235BInstruct": "Qwen/Qwen3-235B-A22B-Instruct-2507",
-        "NEB_DeepSeekV32": "deepseek-ai/DeepSeek-V3.2",
-        "GPT5Mini": "gpt-5-mini-2025-08-07",
-        "GPT54Nano": "gpt-5.4-nano-2026-03-17",
+        "GPT54Mini": "gpt-5.4-mini-2026-03-17"
+        #"NEB_DeepSeekV32": "deepseek-ai/DeepSeek-V3.2",
+        #"GPT5Mini": "gpt-5-mini-2025-08-07",
+        #"GPT54Nano": "gpt-5.4-nano-2026-03-17",
     }
 
     def print_supported_llms(self):
@@ -71,7 +72,11 @@ class LLM_Service:
         parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
         format_instructions = parser.get_format_instructions()
         try:
-            messages = [{"role": "user", "content": prompt + format_instructions}]
+            if hasattr(prompt, "messages") and prompt.messages:
+                messages = prompt.messages[:]
+                messages[-1]["content"] += format_instructions
+            else:
+                messages = [{"role": "user", "content": prompt.prompt + format_instructions}]
             completion = self.gpt_client.chat.completions.create(
                 model=model_url, messages=messages
             )
@@ -97,7 +102,11 @@ class LLM_Service:
         parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
         format_instructions = parser.get_format_instructions()
         try:
-            messages = [{"role": "user", "content": prompt + format_instructions}]
+            if hasattr(prompt, "messages") and prompt.messages:
+                messages = prompt.messages[:]
+                messages[-1]["content"] += format_instructions
+            else:
+                messages = [{"role": "user", "content": prompt.prompt + format_instructions}]
             completion = self.nebius_client.chat.completions.create(
                 model=model_url, messages=messages
             )

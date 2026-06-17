@@ -153,6 +153,59 @@ class Statistics:
 
         statistics_file.close()
 
+    def compute_statistics_cross_model(self):
+        df_all = pd.read_csv(self.CLEAN_RESULTS_FILENAME, keep_default_na=False)
+
+        statistics_file = open(self.RESULTS_STATISTICS, 'w', newline='', encoding='utf-8')
+        statistics_writer = csv.writer(statistics_file)
+        statistics_writer.writerow([
+            'prompt_id', 'metric', 'treatment_model', 'control_model',
+            'median_treatment', 'mean_treatment', 'median_control', 'mean_control',
+            'wilcoxon', 'kendall', 'A12'
+        ])
+
+        for pid in df_all['prompt_id'].unique():
+            df = df_all[df_all['prompt_id'] == pid]
+            for metric in self.metrics.get_available_metrics():
+                for treatment in df['model_id'].unique():
+                    for control in df['model_id'].unique():
+                        if treatment == control:
+                            continue
+                        treatment_values = []
+                        control_values = []
+                        for qid in df['question_id'].unique():
+                            t_val = df[metric][
+                                (df["question_id"] == qid) & (df["model_id"] == treatment)
+                            ].values.astype(float)
+                            c_val = df[metric][
+                                (df["question_id"] == qid) & (df["model_id"] == control)
+                            ].values.astype(float)
+                            if len(t_val) == 1 and len(c_val) == 1:
+                                treatment_values.append(t_val[0])
+                                control_values.append(c_val[0])
+
+                        wil_p = ken_p = A12 = 0
+                        if (len(treatment_values) > 0
+                                and len(treatment_values) == len(control_values)
+                                and not np.allclose(treatment_values, control_values)):
+                            _, wil_p = ss.wilcoxon(treatment_values, control_values)
+                            _, ken_p = ss.kendalltau(treatment_values, control_values)
+                            A12, _ = self.VD_A(treatment_values, control_values)
+
+                        statistics_writer.writerow([
+                            pid, metric, treatment, control,
+                            "{:.4f}".format(np.median(treatment_values)),
+                            "{:.4f}".format(np.mean(treatment_values)),
+                            "{:.4f}".format(np.median(control_values)),
+                            "{:.4f}".format(np.mean(control_values)),
+                            "{:.4f}".format(wil_p),
+                            "{:.4f}".format(ken_p),
+                            "{:.4f}".format(A12)
+                        ])
+                        statistics_file.flush()
+
+        statistics_file.close()
+
     def generate_summary(self):
         d_type = {"question_id":str,"prompt_id":str,"model_id":str,"question":str,
                   "correct_answer":str,"distractor1":str,"distractor2":str,"distractor3":str,"support":str,

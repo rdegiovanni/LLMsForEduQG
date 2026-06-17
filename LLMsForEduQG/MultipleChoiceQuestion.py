@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional
+from pydantic.json_schema import SkipJsonSchema
 
 
 class MultipleChoiceQuestion(BaseModel):
@@ -8,7 +9,7 @@ class MultipleChoiceQuestion(BaseModel):
     distractor1: Optional[str] = Field(default="",description="first distractor of the multi-choice question")
     distractor2: Optional[str] = Field(default="",description="second distractor of the multi-choice question")
     distractor3: Optional[str] = Field(default="",description="third distractor of the multi-choice question")
-    support: Optional[str] = Field(default="",description="support text corresponding to the multi-choice question")
+    support: SkipJsonSchema[Optional[str]] = Field(default="",description="support text corresponding to the multi-choice question")
 
     # @validator("question")
     # def question_ends_with_question_mark(cls, field):

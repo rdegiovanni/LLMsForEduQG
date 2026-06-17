@@ -26,3 +26,19 @@ Decision: Go forward with FewShot (context + examples, no answer provided) for c
 ### Description
 ### Results
 ## Phase 4
+
+---
+
+# RAG
+## Overlap Analysis
+We used 2 different vector stores: one embedding the support text, the other embedding the question-answer pairs. We then used them for retrieval and we calculated the overlap between the examples retrieved from both datastores.
+Results: 
+```
+mean_jaccard,overlap_percentage,no_examples_support,no_examples_qa
+0.25,0.61,0.22,0.17
+```
+So:
+- on average, 25% of the examples are shared between the 2 methods
+- 61% of the queries have AT LEAST 1 shared example
+- 22% of the queries found no similar support text within the threshold (0.65 -> chosen by applying the elbow method)
+- 17% of the queries found no similar question-answer pair within the threshold (0.55)

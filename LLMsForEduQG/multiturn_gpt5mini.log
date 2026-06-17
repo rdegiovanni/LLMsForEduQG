@@ -1,0 +1,2546 @@
+nohup: ignoring input
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/ldap/coccia@private.list.lu/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:187: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 11040). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Namespace(input_filename='/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/datasets/SciQ_100_valid.csv', results_dir='/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/results/Multiturn_GPT5Mini', MAX=0, random_choice=False, models_list=['GPT5Mini'], models_prefix=None, prompts_list=['Multiturn', 'Multiturn_WithAnswer'], list_llms=False, list_prompts=False, rag_data_path=None)
+Initializing RAG Service with data from: /mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/datasets/SciQ_100_valid.csv
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3908.16it/s]
+Ingesting data into ChromaDB...
+Batches:   0%|          | 0/2 [00:00<?, ?it/s]Batches:  50%|█████     | 1/2 [00:14<00:14, 14.72s/it]Batches: 100%|██████████| 2/2 [00:15<00:00,  6.28s/it]Batches: 100%|██████████| 2/2 [00:15<00:00,  7.54s/it]
+Adding batch 0:89 to ChromaDB...
+Successfully ingested 89 documents.
+Running QID: 11689, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4378.91it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/LLMsForEduQG/LLMsForEduQG.py:196: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  self.generated_questions = pd.concat(
+>>>
+>>>
+Running QID: 11689, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4988.84it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11702, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4132.48it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11702, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3497.88it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11709, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4515.51it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11709, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3636.89it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11718, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3877.52it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11718, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3474.24it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11733, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4453.18it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11733, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4750.51it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11738, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3656.08it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11738, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4010.76it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11742, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3717.38it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11742, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4817.86it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11745, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3271.31it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11745, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4076.49it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11746, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3569.20it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11746, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5748.12it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11749, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5760.74it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11749, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3617.80it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11767, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3693.97it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11767, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2751.19it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11775, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3922.69it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11775, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3324.83it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11815, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3566.43it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11815, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4830.27it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11818, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4308.92it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11818, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4060.20it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11853, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3312.85it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11853, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3795.46it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11877, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4337.73it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11877, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3516.70it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11888, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3180.33it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11888, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2870.88it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11889, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3382.44it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11889, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3753.29it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11897, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2956.10it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11897, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4554.32it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11914, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4420.91it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11914, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4127.33it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11940, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3420.49it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11940, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3800.24it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11954, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3738.44it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11954, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3039.48it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11956, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4037.54it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11956, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5246.19it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11959, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3652.31it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11959, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3815.30it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11968, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2574.01it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11968, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2693.37it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11971, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3246.00it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11971, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3632.19it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11975, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4670.28it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11975, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4533.46it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11978, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3716.28it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11978, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4483.51it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11986, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3418.29it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11986, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3536.54it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11991, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3334.54it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11991, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3692.84it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11997, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4556.35it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11997, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3531.04it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11998, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4043.96it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11998, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4311.86it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12006, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4243.65it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12006, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3378.96it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12007, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3131.12it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12007, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2851.47it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12050, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3404.63it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12050, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5860.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12061, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4110.79it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12061, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3770.35it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12090, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3388.16it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12090, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3521.31it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12115, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5020.20it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12115, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2817.60it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12118, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3794.41it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12118, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3627.17it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12130, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3828.77it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12130, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2684.17it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12192, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4124.35it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12192, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3493.87it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12200, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3274.00it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12200, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2859.22it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12201, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3007.81it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12201, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3364.77it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12206, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4137.12it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12206, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3745.34it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12221, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3583.87it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12221, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3549.51it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12222, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3370.85it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12222, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3315.05it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12227, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2874.86it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12227, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5806.18it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12228, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3506.41it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12228, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4020.47it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12263, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4520.21it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12263, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 6126.70it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12268, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4305.11it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12268, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4264.28it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12269, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2962.12it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12269, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3182.03it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12280, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3168.44it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12280, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4936.26it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12283, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3811.56it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12283, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3976.33it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12296, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4136.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12296, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2843.03it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12300, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3089.67it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12300, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2890.29it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12305, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3711.07it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12305, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3194.71it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12315, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3425.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12315, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3594.88it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12331, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3804.34it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12331, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4120.42it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12339, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2923.43it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12339, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3864.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12341, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4637.84it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12341, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4916.21it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12357, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4787.37it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12357, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3986.85it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12358, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3554.42it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12358, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4496.50it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12366, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3871.83it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12366, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3301.98it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12371, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3060.47it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12371, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2816.27it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12393, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3655.88it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12393, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3483.14it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12416, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3957.83it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12416, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3710.65it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12419, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3315.91it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12419, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2953.87it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12432, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4751.13it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12432, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3845.17it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12440, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4312.60it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12440, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3931.57it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12443, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3774.29it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12443, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3657.98it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12466, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5194.09it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12466, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3327.99it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12490, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3583.62it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12490, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3607.71it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12499, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3375.95it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12499, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5202.00it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12505, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4562.49it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12505, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3566.30it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12516, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3603.32it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12516, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4352.52it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12538, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3926.45it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12538, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 6537.12it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12545, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3752.69it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12545, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5329.22it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12558, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5038.26it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12558, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3888.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12562, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5805.62it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12562, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3537.61it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12578, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4795.31it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12578, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3564.35it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12580, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3939.72it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12580, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4092.20it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12581, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4041.64it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12581, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5835.41it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12603, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3631.59it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12603, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 6116.40it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12617, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4178.50it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12617, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4800.04it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12626, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3723.60it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12626, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3857.55it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12652, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3728.14it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12652, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4240.17it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12653, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5316.34it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12653, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3693.38it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12665, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 9652.51it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12665, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3455.79it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12677, PID: PromptID.Multiturn, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3147.89it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12677, PID: PromptID.Multiturn_WithAnswer, MID: GPT5Mini.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4153.75it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+cls.seq_relationship.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+summary: PID: Multiturn, MID: GPT5Mini
+summary: PID: Multiturn_WithAnswer, MID: GPT5Mini
+Metric: bleu_1
+>>>
+>>>
+Metric: bleu_2
+>>>
+>>>
+Metric: bleu_3
+>>>
+>>>
+Metric: bleu_4
+>>>
+>>>
+Metric: f1
+>>>
+>>>
+Metric: ppl_scores
+>>>
+>>>
+Metric: divs
+>>>
+>>>
+Metric: grammer
+>>>
+>>>
+Metric: copy_ratio_support
+>>>
+>>>
+Metric: copy_ratio_reference
+>>>
+>>>
+Metric: copy_ratio_examples
+>>>
+>>>
+>>>>
+Cold Models: []
+Unsupported Models: []

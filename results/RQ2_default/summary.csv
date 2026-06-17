@@ -1,0 +1,5 @@
+prompt_id,model_id,bleu_1,bleu_2,bleu_3,bleu_4,f1,ppl_scores,divs,grammer,copy_ratio_support,copy_ratio_reference,copy_ratio_examples,num_gen_questions,success_ratio
+ZeroShot,GPT5Mini,0.1906,0.1228,0.0983,0.0864,0.1859,12.3075,0.8882,0.0000,0.1707,0.0865,0.0000,884,1.0000
+ZeroShot_WithAnswer,GPT5Mini,0.2628,0.1864,0.1469,0.1225,0.3207,11.3022,0.9168,0.0000,0.1693,0.1278,0.0000,884,1.0000
+FewShot,GPT5Mini,0.1922,0.1246,0.1003,0.0884,0.1883,12.1349,0.8901,0.0000,0.1735,0.0899,0.0000,884,1.0000
+FewShot_WithAnswer,GPT5Mini,0.2636,0.1886,0.1492,0.1248,0.3244,10.8820,0.9175,0.0000,0.1729,0.1300,0.0000,884,1.0000

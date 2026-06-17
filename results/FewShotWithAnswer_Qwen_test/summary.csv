@@ -1,0 +1,2 @@
+prompt_id,model_id,bleu_1,bleu_2,bleu_3,bleu_4,f1,ppl_scores,divs,grammer,copy_ratio_support,copy_ratio_reference,copy_ratio_examples,num_gen_questions,success_ratio
+FewShot_WithAnswer,NEB_Qwen3235BInstruct,0.4645,0.3756,0.3107,0.2617,0.5554,16.5490,0.8892,0.0000,0.2650,0.2657,0.0892,10,1.0000

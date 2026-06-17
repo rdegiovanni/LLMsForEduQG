@@ -112,6 +112,9 @@ class LLMsForEduQG:
             PromptID.FewShot_WithAnswer,
             PromptID.FewShot_Reverse,
             PromptID.FewShot_MostSimMiddle,
+            PromptID.FewShot_Reverse_WithAnswer,
+            PromptID.Multiturn,
+            PromptID.Multiturn_WithAnswer
         ]:
             # using the current question's support text as the query to find 3 similar texts in the datastore
             examples = self.rag_service.retrieve_examples(
@@ -134,7 +137,7 @@ class LLMsForEduQG:
                 continue
             print("Running QID: {}, PID: {}, MID: {}.".format(qid, prompt.id, mid))
             retrieved_examples = prompt.retrieved_examples
-            response = self.llm_service.execute_prompt(mid, prompt.prompt)
+            response = self.llm_service.execute_prompt(mid, prompt)
             if response is None:
                 answer_result = {
                     "question_id": qid,
@@ -186,7 +189,7 @@ class LLMsForEduQG:
                     "distractor1": response.distractor1,
                     "distractor2": response.distractor2,
                     "distractor3": response.distractor3,
-                    "support": response.support,
+                    "support": support_text,
                 }
                 for m in self.metrics.get_available_metrics():
                     answer_result[m] = answer_scores[m][0]

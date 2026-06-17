@@ -9,11 +9,18 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
 
 class RAG_Service:
-    def __init__(self, data_path: str, collection_name: str = "sciq_examples", similarity_threshold=0.3):
+    def __init__(self, data_path: str, collection_name: str = "sciq_examples", similarity_threshold=1.0, embedding_target: str = "support"):
+        """
+        embedding_target: The text that will be embedded. Accepted values: 
+            - support -> to embed the support text in the datastore
+            - qa -> to embed a question-answer pair. no distractors
+
+        """
         print(f"Initializing RAG Service with data from: {data_path}")
         self.similarity_threshold = similarity_threshold # only examples with more than 70% similarity are used
         self.data_path = data_path
         self.embedding_model = SentenceTransformer("all-mpnet-base-v2")
+        self.embedding_target = embedding_target
         self.chroma_client = chromadb.Client()
         self.collection = self.chroma_client.get_or_create_collection(name=collection_name, metadata={"hnsw:space": "cosine"})
 
@@ -23,7 +30,7 @@ class RAG_Service:
             print(f"Collection '{collection_name}' already exists with {self.collection.count()} entries.")
 
     def _ingest_data(self):
-        """Reads CSV, embeds support text, and stores metadata."""
+        """Reads CSV, embeds text, and stores metadata in batches."""
         print("Ingesting data into ChromaDB...")
         try:
             df = pd.read_csv(self.data_path)
@@ -33,26 +40,50 @@ class RAG_Service:
             metadatas = []
             ids = []
 
-            for idx, row in df.iterrows():
-                documents.append(row["support"])
-                metadatas.append({
-                    "question_id": str(row.get("question_id", idx)),
-                    "question": row["question"],
-                    "correct_answer": row["correct_answer"],
-                    "distractor1": row["distractor1"],
-                    "distractor2": row["distractor2"],
-                    "distractor3": row["distractor3"]
-                })
-                ids.append(str(idx))
+            if self.embedding_target == "support": 
+                for idx, row in df.iterrows():
+                    documents.append(row["support"])
+                    metadatas.append({
+                        "question_id":    str(row.get("question_id", idx)),
+                        "question":       row["question"],
+                        "correct_answer": row["correct_answer"],
+                        "distractor1":    row["distractor1"],
+                        "distractor2":    row["distractor2"],
+                        "distractor3":    row["distractor3"]
+                    })
+                    ids.append(str(idx))
+            elif self.embedding_target == "qa":
+                for idx, row in df.iterrows():
+                    documents.append(f"{row['question']} {row['correct_answer']}")
+                    metadatas.append({
+                        "question_id":    str(row.get("question_id", idx)),
+                        "question":       row["question"],
+                        "correct_answer": row["correct_answer"],
+                        "support":        row["support"],
+                        "distractor1":    row["distractor1"],
+                        "distractor2":    row["distractor2"],
+                        "distractor3":    row["distractor3"]
+                    })
+                    ids.append(str(idx))
 
-            embeddings = self.embedding_model.encode(documents).tolist()  # why do we need to transform them into a list?
 
-            self.collection.add(
-                embeddings=embeddings,
-                documents=documents, 
-                metadatas=metadatas,
-                ids=ids
-            )
+            embeddings = self.embedding_model.encode(
+                documents,
+                batch_size=64,
+                show_progress_bar=True
+            ).tolist()
+
+            # chunk into batches of 5000
+            batch_size = 5000
+            for start in range(0, len(ids), batch_size):
+                end = min(start + batch_size, len(ids))
+                print(f"Adding batch {start}:{end} to ChromaDB...")
+                self.collection.add(
+                    embeddings=embeddings[start:end],
+                    documents=documents[start:end],
+                    metadatas=metadatas[start:end],
+                    ids=ids[start:end]
+                )
 
             print(f"Successfully ingested {len(ids)} documents.")
 
@@ -79,24 +110,20 @@ class RAG_Service:
                 meta = results["metadatas"][0][i]
 
                 example = {
-                    "support": doc,
+                    "question_id": meta["question_id"],
+                    "support": meta.get("support", doc),
                     "question": meta["question"],
                     "correct_answer": meta["correct_answer"],
                     "distractors": [
                         meta["distractor1"],
                         meta["distractor2"],
                         meta["distractor3"]
-                    ]
+                    ],
+                    "distance": distance
                 }
 
                 examples.append(example)
         
         return examples
+    
 
-
-
-
-# underline the methods of collection
-# check what these methods return
-
-# don't we need the ids of the question?

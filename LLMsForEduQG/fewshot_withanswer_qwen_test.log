@@ -1,0 +1,195 @@
+nohup: ignoring input
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/ldap/coccia@private.list.lu/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:187: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 11040). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Namespace(input_filename='/home/ldap/coccia@private.list.lu/oat_2024/RAGForEduQG/datasets/SciQ_100_valid.csv', results_dir='/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/results/FewShotWithAnswer_Qwen_test', MAX=10, random_choice=False, models_list=['NEB_Qwen3235BInstruct'], models_prefix=None, prompts_list=['FewShot_WithAnswer'], list_llms=False, list_prompts=False, rag_data_path='/home/ldap/coccia@private.list.lu/oat_2024/RAGForEduQG/datasets/SciQ_train_clean.csv')
+Initializing RAG Service with data from: /home/ldap/coccia@private.list.lu/oat_2024/RAGForEduQG/datasets/SciQ_train_clean.csv
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 4954.80it/s]
+Ingesting data into ChromaDB...
+Batches:   0%|          | 0/163 [00:00<?, ?it/s]Batches:   1%|          | 1/163 [00:14<39:16, 14.55s/it]Batches:   1%|          | 2/163 [00:27<36:37, 13.65s/it]Batches:   2%|▏         | 3/163 [00:40<36:02, 13.52s/it]Batches:   2%|▏         | 4/163 [00:53<34:20, 12.96s/it]Batches:   3%|▎         | 5/163 [01:05<33:21, 12.67s/it]Batches:   4%|▎         | 6/163 [01:19<34:34, 13.22s/it]Batches:   4%|▍         | 7/163 [01:31<33:30, 12.89s/it]Batches:   5%|▍         | 8/163 [01:43<32:20, 12.52s/it]Batches:   6%|▌         | 9/163 [01:54<31:20, 12.21s/it]Batches:   6%|▌         | 10/163 [02:07<31:06, 12.20s/it]Batches:   7%|▋         | 11/163 [02:18<30:27, 12.02s/it]Batches:   7%|▋         | 12/163 [02:32<31:57, 12.70s/it]Batches:   8%|▊         | 13/163 [02:43<29:57, 11.98s/it]Batches:   9%|▊         | 14/163 [02:53<28:04, 11.30s/it]Batches:   9%|▉         | 15/163 [03:01<26:07, 10.59s/it]Batches:  10%|▉         | 16/163 [03:11<24:56, 10.18s/it]Batches:  10%|█         | 17/163 [03:19<23:31,  9.67s/it]Batches:  11%|█         | 18/163 [03:26<21:34,  8.93s/it]Batches:  12%|█▏        | 19/163 [03:33<20:01,  8.35s/it]Batches:  12%|█▏        | 20/163 [03:41<19:06,  8.02s/it]Batches:  13%|█▎        | 21/163 [03:47<17:56,  7.58s/it]Batches:  13%|█▎        | 22/163 [03:53<16:47,  7.14s/it]Batches:  14%|█▍        | 23/163 [04:01<16:44,  7.17s/it]Batches:  15%|█▍        | 24/163 [04:07<15:54,  6.86s/it]Batches:  15%|█▌        | 25/163 [04:13<15:07,  6.57s/it]Batches:  16%|█▌        | 26/163 [04:18<14:24,  6.31s/it]Batches:  17%|█▋        | 27/163 [04:24<13:53,  6.13s/it]Batches:  17%|█▋        | 28/163 [04:29<13:14,  5.89s/it]Batches:  18%|█▊        | 29/163 [04:35<13:17,  5.95s/it]Batches:  18%|█▊        | 30/163 [04:41<12:55,  5.83s/it]Batches:  19%|█▉        | 31/163 [04:46<12:23,  5.63s/it]Batches:  20%|█▉        | 32/163 [04:51<11:30,  5.27s/it]Batches:  20%|██        | 33/163 [04:55<10:45,  4.96s/it]Batches:  21%|██        | 34/163 [04:59<09:52,  4.59s/it]Batches:  21%|██▏       | 35/163 [05:03<09:53,  4.64s/it]Batches:  22%|██▏       | 36/163 [05:07<09:03,  4.28s/it]Batches:  23%|██▎       | 37/163 [05:11<09:13,  4.39s/it]Batches:  23%|██▎       | 38/163 [05:15<08:31,  4.09s/it]Batches:  24%|██▍       | 39/163 [05:18<07:56,  3.84s/it]Batches:  25%|██▍       | 40/163 [05:22<07:41,  3.75s/it]Batches:  25%|██▌       | 41/163 [05:24<07:02,  3.46s/it]Batches:  26%|██▌       | 42/163 [05:28<06:55,  3.43s/it]Batches:  26%|██▋       | 43/163 [05:31<06:37,  3.31s/it]Batches:  27%|██▋       | 44/163 [05:34<06:17,  3.17s/it]Batches:  28%|██▊       | 45/163 [05:36<05:53,  3.00s/it]Batches:  28%|██▊       | 46/163 [05:40<06:06,  3.14s/it]Batches:  29%|██▉       | 47/163 [05:42<05:42,  2.95s/it]Batches:  29%|██▉       | 48/163 [05:45<05:21,  2.80s/it]Batches:  30%|███       | 49/163 [05:48<05:45,  3.03s/it]Batches:  31%|███       | 50/163 [05:51<05:40,  3.01s/it]Batches:  31%|███▏      | 51/163 [05:54<05:15,  2.82s/it]Batches:  32%|███▏      | 52/163 [05:56<05:05,  2.75s/it]Batches:  33%|███▎      | 53/163 [06:00<05:30,  3.01s/it]Batches:  33%|███▎      | 54/163 [06:03<05:42,  3.14s/it]Batches:  34%|███▎      | 55/163 [06:06<05:14,  2.91s/it]Batches:  34%|███▍      | 56/163 [06:08<05:04,  2.84s/it]Batches:  35%|███▍      | 57/163 [06:11<04:56,  2.80s/it]Batches:  36%|███▌      | 58/163 [06:13<04:39,  2.66s/it]Batches:  36%|███▌      | 59/163 [06:16<04:27,  2.57s/it]Batches:  37%|███▋      | 60/163 [06:19<04:44,  2.76s/it]Batches:  37%|███▋      | 61/163 [06:22<04:41,  2.76s/it]Batches:  38%|███▊      | 62/163 [06:24<04:17,  2.55s/it]Batches:  39%|███▊      | 63/163 [06:26<04:04,  2.45s/it]Batches:  39%|███▉      | 64/163 [06:29<04:18,  2.61s/it]Batches:  40%|███▉      | 65/163 [06:32<04:30,  2.76s/it]Batches:  40%|████      | 66/163 [06:34<04:17,  2.66s/it]Batches:  41%|████      | 67/163 [06:37<04:02,  2.53s/it]Batches:  42%|████▏     | 68/163 [06:39<03:51,  2.43s/it]Batches:  42%|████▏     | 69/163 [06:41<03:40,  2.34s/it]Batches:  43%|████▎     | 70/163 [06:43<03:36,  2.33s/it]Batches:  44%|████▎     | 71/163 [06:46<03:32,  2.31s/it]Batches:  44%|████▍     | 72/163 [06:47<03:17,  2.17s/it]Batches:  45%|████▍     | 73/163 [06:49<03:12,  2.13s/it]Batches:  45%|████▌     | 74/163 [06:52<03:09,  2.12s/it]Batches:  46%|████▌     | 75/163 [06:53<03:02,  2.07s/it]Batches:  47%|████▋     | 76/163 [06:55<02:55,  2.02s/it]Batches:  47%|████▋     | 77/163 [06:57<02:53,  2.01s/it]Batches:  48%|████▊     | 78/163 [07:00<03:04,  2.18s/it]Batches:  48%|████▊     | 79/163 [07:02<02:53,  2.06s/it]Batches:  49%|████▉     | 80/163 [07:03<02:41,  1.95s/it]Batches:  50%|████▉     | 81/163 [07:05<02:36,  1.91s/it]Batches:  50%|█████     | 82/163 [07:07<02:36,  1.93s/it]Batches:  51%|█████     | 83/163 [07:09<02:40,  2.01s/it]Batches:  52%|█████▏    | 84/163 [07:12<02:41,  2.04s/it]Batches:  52%|█████▏    | 85/163 [07:13<02:28,  1.90s/it]Batches:  53%|█████▎    | 86/163 [07:15<02:22,  1.85s/it]Batches:  53%|█████▎    | 87/163 [07:17<02:17,  1.81s/it]Batches:  54%|█████▍    | 88/163 [07:18<02:13,  1.78s/it]Batches:  55%|█████▍    | 89/163 [07:20<02:18,  1.88s/it]Batches:  55%|█████▌    | 90/163 [07:22<02:20,  1.92s/it]Batches:  56%|█████▌    | 91/163 [07:24<02:12,  1.84s/it]Batches:  56%|█████▋    | 92/163 [07:25<02:01,  1.72s/it]Batches:  57%|█████▋    | 93/163 [07:27<01:51,  1.60s/it]Batches:  58%|█████▊    | 94/163 [07:28<01:52,  1.63s/it]Batches:  58%|█████▊    | 95/163 [07:30<01:50,  1.62s/it]Batches:  59%|█████▉    | 96/163 [07:31<01:42,  1.52s/it]Batches:  60%|█████▉    | 97/163 [07:33<01:37,  1.48s/it]Batches:  60%|██████    | 98/163 [07:34<01:32,  1.42s/it]Batches:  61%|██████    | 99/163 [07:35<01:28,  1.38s/it]Batches:  61%|██████▏   | 100/163 [07:37<01:23,  1.33s/it]Batches:  62%|██████▏   | 101/163 [07:38<01:25,  1.38s/it]Batches:  63%|██████▎   | 102/163 [07:40<01:29,  1.46s/it]Batches:  63%|██████▎   | 103/163 [07:41<01:23,  1.39s/it]Batches:  64%|██████▍   | 104/163 [07:43<01:26,  1.47s/it]Batches:  64%|██████▍   | 105/163 [07:44<01:30,  1.56s/it]Batches:  65%|██████▌   | 106/163 [07:46<01:23,  1.47s/it]Batches:  66%|██████▌   | 107/163 [07:47<01:17,  1.39s/it]Batches:  66%|██████▋   | 108/163 [07:49<01:23,  1.51s/it]Batches:  67%|██████▋   | 109/163 [07:50<01:16,  1.42s/it]Batches:  67%|██████▋   | 110/163 [07:51<01:18,  1.47s/it]Batches:  68%|██████▊   | 111/163 [07:52<01:10,  1.36s/it]Batches:  69%|██████▊   | 112/163 [07:54<01:05,  1.28s/it]Batches:  69%|██████▉   | 113/163 [07:55<01:00,  1.20s/it]Batches:  70%|██████▉   | 114/163 [07:56<00:56,  1.16s/it]Batches:  71%|███████   | 115/163 [07:57<00:53,  1.12s/it]Batches:  71%|███████   | 116/163 [07:58<00:52,  1.13s/it]Batches:  72%|███████▏  | 117/163 [07:59<00:50,  1.10s/it]Batches:  72%|███████▏  | 118/163 [08:00<00:47,  1.06s/it]Batches:  73%|███████▎  | 119/163 [08:01<00:45,  1.03s/it]Batches:  74%|███████▎  | 120/163 [08:02<00:43,  1.01s/it]Batches:  74%|███████▍  | 121/163 [08:03<00:42,  1.00s/it]Batches:  75%|███████▍  | 122/163 [08:04<00:40,  1.02it/s]Batches:  75%|███████▌  | 123/163 [08:05<00:38,  1.05it/s]Batches:  76%|███████▌  | 124/163 [08:06<00:37,  1.03it/s]Batches:  77%|███████▋  | 125/163 [08:07<00:37,  1.00it/s]Batches:  77%|███████▋  | 126/163 [08:07<00:33,  1.10it/s]Batches:  78%|███████▊  | 127/163 [08:08<00:33,  1.06it/s]Batches:  79%|███████▊  | 128/163 [08:09<00:34,  1.03it/s]Batches:  79%|███████▉  | 129/163 [08:10<00:30,  1.11it/s]Batches:  80%|███████▉  | 130/163 [08:11<00:27,  1.20it/s]Batches:  80%|████████  | 131/163 [08:12<00:25,  1.27it/s]Batches:  81%|████████  | 132/163 [08:12<00:24,  1.27it/s]Batches:  82%|████████▏ | 133/163 [08:13<00:22,  1.30it/s]Batches:  82%|████████▏ | 134/163 [08:14<00:21,  1.36it/s]Batches:  83%|████████▎ | 135/163 [08:14<00:20,  1.38it/s]Batches:  83%|████████▎ | 136/163 [08:15<00:19,  1.40it/s]Batches:  84%|████████▍ | 137/163 [08:16<00:18,  1.42it/s]Batches:  85%|████████▍ | 138/163 [08:16<00:17,  1.42it/s]Batches:  85%|████████▌ | 139/163 [08:17<00:16,  1.45it/s]Batches:  86%|████████▌ | 140/163 [08:18<00:15,  1.52it/s]Batches:  87%|████████▋ | 141/163 [08:19<00:15,  1.38it/s]Batches:  87%|████████▋ | 142/163 [08:20<00:16,  1.27it/s]Batches:  88%|████████▊ | 143/163 [08:20<00:14,  1.37it/s]Batches:  88%|████████▊ | 144/163 [08:21<00:12,  1.47it/s]Batches:  89%|████████▉ | 145/163 [08:21<00:11,  1.55it/s]Batches:  90%|████████▉ | 146/163 [08:22<00:10,  1.65it/s]Batches:  90%|█████████ | 147/163 [08:22<00:08,  1.80it/s]Batches:  91%|█████████ | 148/163 [08:23<00:08,  1.86it/s]Batches:  91%|█████████▏| 149/163 [08:23<00:07,  1.88it/s]Batches:  92%|█████████▏| 150/163 [08:24<00:06,  1.95it/s]Batches:  93%|█████████▎| 151/163 [08:24<00:05,  2.01it/s]Batches:  93%|█████████▎| 152/163 [08:25<00:05,  1.94it/s]Batches:  94%|█████████▍| 153/163 [08:25<00:04,  2.01it/s]Batches:  94%|█████████▍| 154/163 [08:26<00:04,  2.07it/s]Batches:  95%|█████████▌| 155/163 [08:26<00:03,  2.21it/s]Batches:  96%|█████████▌| 156/163 [08:27<00:03,  2.11it/s]Batches:  96%|█████████▋| 157/163 [08:27<00:02,  2.13it/s]Batches:  97%|█████████▋| 158/163 [08:27<00:02,  2.10it/s]Batches:  98%|█████████▊| 159/163 [08:28<00:01,  2.01it/s]Batches:  98%|█████████▊| 160/163 [08:28<00:01,  2.24it/s]Batches:  99%|█████████▉| 161/163 [08:29<00:00,  2.40it/s]Batches:  99%|█████████▉| 162/163 [08:29<00:00,  2.58it/s]Batches: 100%|██████████| 163/163 [08:29<00:00,  2.69it/s]Batches: 100%|██████████| 163/163 [08:29<00:00,  3.13s/it]
+Adding batch 0:5000 to ChromaDB...
+Adding batch 5000:10000 to ChromaDB...
+Adding batch 10000:10415 to ChromaDB...
+Successfully ingested 10415 documents.
+Running QID: 12200, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3885.98it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/LLMsForEduQG/LLMsForEduQG.py:196: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  self.generated_questions = pd.concat(
+>>>
+>>>
+Running QID: 12416, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3674.71it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12419, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3726.25it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12339, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3758.54it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12090, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5080.38it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12357, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4567.21it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12305, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 5046.97it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12192, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 4675.41it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 12538, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3582.18it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+Running QID: 11815, PID: PromptID.FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 3783.31it/s]
+[transformers] [1mBertForMaskedLM LOAD REPORT[0m from: bert-base-uncased
+Key                         | Status     |  | 
+----------------------------+------------+--+-
+cls.seq_relationship.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias      | UNEXPECTED |  | 
+cls.seq_relationship.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight    | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+>>>
+>>>
+summary: PID: FewShot_WithAnswer, MID: NEB_Qwen3235BInstruct
+Metric: bleu_1
+>>>
+>>>
+Metric: bleu_2
+>>>
+>>>
+Metric: bleu_3
+>>>
+>>>
+Metric: bleu_4
+>>>
+>>>
+Metric: f1
+>>>
+>>>
+Metric: ppl_scores
+>>>
+>>>
+Metric: divs
+>>>
+>>>
+Metric: grammer
+>>>
+>>>
+Metric: copy_ratio_support
+>>>
+>>>
+Metric: copy_ratio_reference
+>>>
+>>>
+Metric: copy_ratio_examples
+>>>
+>>>
+>>>>
+Cold Models: []
+Unsupported Models: []

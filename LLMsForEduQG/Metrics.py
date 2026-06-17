@@ -10,6 +10,7 @@ from nltk import word_tokenize, ngrams
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from sklearn.metrics import f1_score
 
+
 import nltk
 nltk.download('punkt_tab')
 
@@ -71,6 +72,7 @@ class Metrics():
                                     smoothing_function=chencherry.method2)
         bleu_score4 = sentence_bleu(gt_tokens, prediction_tokens, weights=(1. / 4., 1. / 4., 1. / 4., 1. / 4.),
                                     smoothing_function=chencherry.method2)
+
         return [bleu_score1,bleu_score2,bleu_score3,bleu_score4]
 
     def compute_perplexity(self,sentence):
@@ -86,22 +88,20 @@ class Metrics():
             loss = model(masked_input, labels=labels).loss
         return np.exp(loss.item())
 
-    def compute_grammer(self,prediction):
+    def compute_grammar(self,prediction):
         tool = language_tool_python.LanguageTool('en-US')
         matches = tool.check(prediction)
         return len(matches)
 
     def get_available_metrics(self):
-        return ['bleu_1', 'bleu_2', 'bleu_3', 'bleu_4', 'f1', 'ppl_scores', 'divs', 'grammer', 'copy_ratio_support', 'copy_ratio_reference', 'copy_ratio_examples'] #, 'stats', 'words', 'count']
+        return ['bleu_1', 'bleu_2', 'bleu_3', 'bleu_4','f1', 'ppl_scores', 'divs', 'grammar'] #, 'stats', 'words', 'count']
 
 
     def compute_scores(self,prediction,ground_truth, support_text, examples=None):
         results = {
             'f1': [], 'bleu_1': [], 'bleu_2': [], 'bleu_3': [], 'bleu_4': [], 'ppl_scores': [], 'divs': [],
-            'grammer': [],
-              'copy_ratio_support': [],
-               'copy_ratio_reference': [],
-                'copy_ratio_examples': [] #, 'stats': [], 'words': [], 'count': []
+            'grammar': [],
+                #, 'stats': [], 'words': [], 'count': []
         }
         # Calc f1
         score_f1 = self.f1_score(prediction,ground_truth)
@@ -124,54 +124,10 @@ class Metrics():
 
         # Calc Grammer
         # grammer_score = self.compute_grammer(prediction)
-        results['grammer'].append("0.0")
+        # results['grammar'].append("0.0")
 
 
-        # Calc support and reference question copy ratio
-        copy_support = self.longest_common_substring_ratio(prediction, support_text)
-        copy_reference = self.reference_copy_ratio(prediction, ground_truth)
-        results['copy_ratio_support'].append(copy_support)
-        results['copy_ratio_reference'].append(copy_reference)
 
-        # Calc rate of copy of few-shot examples
-        copy_examples = self.examples_copy_ratio(prediction, examples or [])
-        results['copy_ratio_examples'].append(copy_examples)
         return results
 
-    def longest_common_substring_ratio(self, prediction, source):
-        """Longest contiguous word-sequence shared between prediction and source,
-        normalized by prediction length. 1.0 = fully copied; 0.0 = no shared run."""
-        pred_tokens = self.normalize_answer(prediction).split()
-        src_tokens = self.normalize_answer(source).split()
-        if not pred_tokens or not src_tokens:
-            return 0.0
 
-        m, n = len(pred_tokens), len(src_tokens)
-        # rolling DP to keep memory small
-        prev = [0] * (n + 1)
-        longest = 0
-        for i in range(1, m + 1):
-            curr = [0] * (n + 1)
-            for j in range(1, n + 1):
-                if pred_tokens[i - 1] == src_tokens[j - 1]:
-                    curr[j] = prev[j - 1] + 1
-                    if curr[j] > longest:
-                        longest = curr[j]
-            prev = curr
-        return longest / m
-
-    def reference_copy_ratio(self, prediction, ground_truth):
-        """LCS ratio vs the ground-truth reference question.
-        High = model regurgitated the reference instead of generating a new question."""
-        return self.longest_common_substring_ratio(prediction, ground_truth)
-    
-    def examples_copy_ratio(self, prediction, examples):
-        """Max LCS ratio between prediction and any FewShot example question.
-        High = model regurgitated a provided example instead of generating new."""
-        if not examples:
-            return 0.0
-        ratios = [
-            self.longest_common_substring_ratio(prediction, ex["question"])
-            for ex in examples
-        ]
-        return max(ratios) if ratios else 0.0

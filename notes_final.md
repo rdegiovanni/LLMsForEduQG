@@ -1,0 +1,8 @@
+## RQ1
+We embedded all the data (support test) in the training set to create the vector store. We took the test set as the queries to look for related and relevant items in the datastores. So, we are matching the test set with items in the vector store (constructed from the train set). Once we did that, we used the questions of the matching datapoints to construct the few shot examples. Here, the reverse order returned the best results (but the difference is not massive - I am talking about F1 score, in particular). The metrics did not show great performance at all. The best way forward would be to repeat the experiment multiple times and check what comes out of it. For example 30 times or the minimal threshold for the results to be statistically significant. In fact, the statistics reveal that the order of the examples DOES NOT MATTER for gpt5 mini. The difference is not statistically significant. But apparently, the reverse order wins in terms of perplexity.
+## RQ2
+We check whether adding few-shot examples is much more beneficial than zero-shot for this task. We also check whether providing the correct answer to the question improves the metrics. (We assume it does because we are already providing a goal, so the model only has to figure out the wording of the question to be created). There are 4 configurations here:
+* zero-shot without answer
+* zero-shot with answer
+* few-shot without answer
+* few-shot with answer
