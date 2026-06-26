@@ -13,17 +13,21 @@ from matplotlib_venn import venn3, venn3_circles
 import plotly.express as px
 from src.Metrics import Metrics
 from pathlib import Path
+from config import (GENERATED_QUESTIONS_FILE, CLEAN_GENERATED_FILE,
+                    CHOICES_QUALITY_FILE, CHOICES_SUMMARY_FILE,
+                    STATISTICS_FILE, SUMMARY_FILE,
+                    VDA_LEVELS, VDA_MAGNITUDE)
+
 
 class Statistics:
     metrics: Metrics
-    INPUT_FILENAME = ""
     RESULTS_DIR = "results/"
-    RESULTS_FILENAME = "results/generated_questions.csv"
-    CLEAN_RESULTS_FILENAME = "results/clean_generated_questions.csv"
-    CHOICES_QUALITY_FILENAME = "results/choices_quality_analysis.csv"
-    CHOICES_SUMMARY_FILENAME = "results/choices_summary.csv"
-    RESULTS_STATISTICS = "results/statistics.csv"
-    RESULTS_SUMMARY = "results/summary.csv"
+    RESULTS_FILENAME = GENERATED_QUESTIONS_FILE
+    CLEAN_RESULTS_FILENAME = CLEAN_GENERATED_FILE
+    CHOICES_QUALITY_FILENAME = CHOICES_QUALITY_FILE
+    CHOICES_SUMMARY_FILENAME = CHOICES_SUMMARY_FILE
+    RESULTS_STATISTICS = STATISTICS_FILE
+    RESULTS_SUMMARY = SUMMARY_FILE
 
     def __init__(self,input_filename,results_dir,metrics):
         self.INPUT_FILENAME = input_filename
