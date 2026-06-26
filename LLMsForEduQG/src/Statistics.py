@@ -11,7 +11,7 @@ from bisect import bisect_left
 from typing import List
 from matplotlib_venn import venn3, venn3_circles
 import plotly.express as px
-from Metrics import Metrics
+from src.Metrics import Metrics
 from pathlib import Path
 
 class Statistics:

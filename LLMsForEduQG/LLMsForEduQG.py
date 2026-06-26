@@ -5,11 +5,11 @@ import os
 
 import numpy as np
 import pandas as pd
-from LLM_Service import LLM_Service
-from Metrics import Metrics
-from Prompt import Prompt, PromptID
-from RAG_Service import RAG_Service
-from Statistics import Statistics
+from src.LLM_Service import LLM_Service
+from src.Metrics import Metrics
+from src.Prompt import Prompt, PromptID
+from src.RAG_Service import RAG_Service
+from src.Statistics import Statistics
 
 
 class LLMsForEduQG:

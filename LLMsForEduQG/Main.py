@@ -2,7 +2,7 @@ import argparse
 import os.path
 
 from LLMsForEduQG import LLMsForEduQG
-from Prompt import Prompt, PromptID
+from src.Prompt import Prompt, PromptID
 import uuid
 
 def list_of_strings(arg):

@@ -9,12 +9,18 @@ from transformers import AutoModelForMaskedLM, AutoTokenizer
 from nltk import word_tokenize, ngrams
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from sklearn.metrics import f1_score
+from bert_score import BERTScorer
 
 
 import nltk
 nltk.download('punkt_tab')
 
 class Metrics():
+    def __init__(self):
+        self.scorer = BERTScorer(model_type="bert-base-uncased", lang="en")
+        self.tool = language_tool_python.LanguageTool('en-US')
+
+    
     def normalize_answer(self,s):
         """Lower text and remove punctuation, articles and extra whitespace."""
 
@@ -46,6 +52,11 @@ class Metrics():
         f1 = (2 * precision * recall) / (precision + recall)
         return f1
 
+    def bert_score(self, prediction, ground_truth):
+        P, R, F1 = self.scorer.score([prediction], [ground_truth])
+        bert_score = F1.item()
+        return bert_score
+    
     def exact_match_score(self,prediction, ground_truth):
         return (self.normalize_answer(prediction) == self.normalize_answer(ground_truth))
 
@@ -89,18 +100,16 @@ class Metrics():
         return np.exp(loss.item())
 
     def compute_grammar(self,prediction):
-        tool = language_tool_python.LanguageTool('en-US')
-        matches = tool.check(prediction)
+        matches = self.tool.check(prediction)
         return len(matches)
 
     def get_available_metrics(self):
-        return ['bleu_1', 'bleu_2', 'bleu_3', 'bleu_4','f1', 'ppl_scores', 'divs', 'grammar'] #, 'stats', 'words', 'count']
+        return ['bleu_1', 'bleu_2', 'bleu_3', 'bleu_4','f1', 'ppl_scores', 'divs', "bert_score"] #, 'stats', 'words', 'count']
 
 
     def compute_scores(self,prediction,ground_truth, support_text, examples=None):
         results = {
-            'f1': [], 'bleu_1': [], 'bleu_2': [], 'bleu_3': [], 'bleu_4': [], 'ppl_scores': [], 'divs': [],
-            'grammar': [],
+            'f1': [], 'bleu_1': [], 'bleu_2': [], 'bleu_3': [], 'bleu_4': [], 'ppl_scores': [], 'divs': [], 'bert_score': []
                 #, 'stats': [], 'words': [], 'count': []
         }
         # Calc f1
@@ -122,7 +131,10 @@ class Metrics():
         diversity = self.lexical_diversity(prediction)
         results['divs'].append(diversity)
 
-        # Calc Grammer
+        # Calc BERTScore
+        bert_score = self.bert_score(prediction, ground_truth)
+        results['bert_score'].append(bert_score)
+        # Calc Grammar
         # grammer_score = self.compute_grammer(prediction)
         # results['grammar'].append("0.0")
 

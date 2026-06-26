@@ -1,7 +1,7 @@
 import os
 
 from langchain_core.output_parsers import PydanticOutputParser
-from MultipleChoiceQuestion import MultipleChoiceQuestion
+from src.MultipleChoiceQuestion import MultipleChoiceQuestion
 from openai import OpenAI
 from pydantic import ValidationError
 

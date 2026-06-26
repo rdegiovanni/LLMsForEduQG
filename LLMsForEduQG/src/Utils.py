@@ -1,6 +1,6 @@
 import pandas as pd
-from Statistics import Statistics
-from Metrics import Metrics
+from src.Statistics import Statistics
+from src.Metrics import Metrics
 
 def sample_questions():
     try: 
