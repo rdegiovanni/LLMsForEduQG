@@ -1,2 +1,0 @@
-nohup: ignoring input
-/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/.venv/bin/python3: can't open file '/mnt/beegfs/gpfs/filesets/project_2024_OAT/RAGForEduQG/LLMsForEduQG/UtilsAndCompleteAnalyses/retrieval_similarity_analysis.py': [Errno 2] No such file or directory
