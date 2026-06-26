@@ -7,9 +7,10 @@ import pandas as pd
 import chromadb
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
+from config import RAG_COLLECTION_NAME, RAG_DEFAULT_SIMILARITY
 
 class RAG_Service:
-    def __init__(self, data_path: str, collection_name: str = "sciq_examples", similarity_threshold=1.0, embedding_target: str = "support"):
+    def __init__(self, data_path: str, collection_name: str = RAG_COLLECTION_NAME, similarity_threshold=RAG_DEFAULT_SIMILARITY, embedding_target: str = "support"):
         """
         embedding_target: The text that will be embedded. Accepted values: 
             - support -> to embed the support text in the datastore
