@@ -4,10 +4,11 @@ from langchain_core.output_parsers import PydanticOutputParser
 from src.MultipleChoiceQuestion import MultipleChoiceQuestion
 from openai import OpenAI
 from pydantic import ValidationError
+from config import NEBIUS_BASE_URL, LLM_TIMEOUT
 
 
 class LLM_Service:
-    TIMEOUT = 120  # in seconds
+    TIMEOUT = LLM_TIMEOUT  
 
     # key : model
     supported_models = {
@@ -33,7 +34,7 @@ class LLM_Service:
     )
 
     nebius_client = OpenAI(
-        base_url="https://api.tokenfactory.nebius.com/v1/",
+        base_url=NEBIUS_BASE_URL,
         api_key=os.environ.get("NEBIUS_API_KEY"),
     )
 
@@ -64,10 +65,10 @@ class LLM_Service:
             print("Model Skipped:{}".format(model_id))
         return response
 
-    def gpt_execute_prompt(self, model_id="GPT5Mini", prompt=""):
+    def gpt_execute_prompt(self, model_id="GPT54Mini", prompt=""):
         model_url = self.get_model_url(model_id)
         if model_url == "":
-            model_url = self.get_model_url("GPT4oMini")
+            model_url = self.get_model_url("GPT54Mini")
 
         parser = PydanticOutputParser(pydantic_object=MultipleChoiceQuestion)
         format_instructions = parser.get_format_instructions()
