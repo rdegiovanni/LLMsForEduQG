@@ -10,7 +10,7 @@ from nltk import word_tokenize, ngrams
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from sklearn.metrics import f1_score
 from bert_score import BERTScorer
-
+from config import BERT_MODEL
 
 import nltk
 nltk.download('punkt_tab')
@@ -87,7 +87,7 @@ class Metrics():
         return [bleu_score1,bleu_score2,bleu_score3,bleu_score4]
 
     def compute_perplexity(self,sentence):
-        model_bert = 'bert-base-uncased'
+        model_bert = BERT_MODEL
         model = AutoModelForMaskedLM.from_pretrained(model_bert)
         tokenizer = AutoTokenizer.from_pretrained(model_bert)
         tensor_input = tokenizer.encode(sentence, return_tensors='pt')
