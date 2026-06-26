@@ -10,7 +10,8 @@ from src.Metrics import Metrics
 from src.Prompt import Prompt, PromptID
 from src.RAG_Service import RAG_Service
 from src.Statistics import Statistics
-
+# ✅ add this
+from config import RAG_PIPELINE_SIMILARITY
 
 class LLMsForEduQG:
     metrics: Metrics
@@ -42,7 +43,7 @@ class LLMsForEduQG:
         self.llm_service = LLM_Service()
 
         rag_path = rag_data_path if rag_data_path is not None else input_filename
-        self.rag_service = RAG_Service(data_path=rag_path, similarity_threshold=0.3)
+        self.rag_service = RAG_Service(data_path=rag_path, similarity_threshold=RAG_PIPELINE_SIMILARITY)
         self.generated_questions = pd.DataFrame(
             columns=[
                 "question_id",
