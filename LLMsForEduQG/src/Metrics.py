@@ -18,7 +18,7 @@ nltk.download('punkt_tab')
 class Metrics():
     def __init__(self):
         self.scorer = BERTScorer(model_type="bert-base-uncased", lang="en")
-        self.tool = language_tool_python.LanguageTool('en-US')
+        # self.tool = language_tool_python.LanguageTool('en-US')
 
     
     def normalize_answer(self,s):

@@ -3,11 +3,12 @@ This file implements the RAG component of the project. The RAG_Service class cre
 and returns the 3 most similar examples to the user's query.
 """
 
+from pathlib import Path
 import pandas as pd
 import chromadb
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
-from config import RAG_COLLECTION_NAME, RAG_DEFAULT_SIMILARITY
+from config import RAG_COLLECTION_NAME, RAG_DEFAULT_SIMILARITY, CHROMA_PERSIST_DIR
 
 class RAG_Service:
     def __init__(self, data_path: str, collection_name: str = RAG_COLLECTION_NAME, similarity_threshold=RAG_DEFAULT_SIMILARITY, embedding_target: str = "support"):
@@ -22,13 +23,16 @@ class RAG_Service:
         self.data_path = data_path
         self.embedding_model = SentenceTransformer("all-mpnet-base-v2")
         self.embedding_target = embedding_target
-        self.chroma_client = chromadb.Client()
-        self.collection = self.chroma_client.get_or_create_collection(name=collection_name, metadata={"hnsw:space": "cosine"})
-
+        self.chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
+        corpus_name = Path(data_path).stem  
+        unique_name = f"{corpus_name}_{embedding_target}"
+        self.collection = self.chroma_client.get_or_create_collection(name=unique_name, metadata={"hnsw:space": "cosine"})
+        print(f"Using collection: {unique_name}")
+        
         if self.collection.count() == 0:
             self._ingest_data()
         else:
-            print(f"Collection '{collection_name}' already exists with {self.collection.count()} entries.")
+            print(f"Collection '{unique_name}' already exists with {self.collection.count()} entries.")
 
     def _ingest_data(self):
         """Reads CSV, embeds text, and stores metadata in batches."""

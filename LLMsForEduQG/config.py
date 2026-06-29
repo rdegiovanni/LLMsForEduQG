@@ -7,7 +7,7 @@ LLM_TIMEOUT         = 120
 RAG_COLLECTION_NAME         = "sciq_examples"
 RAG_DEFAULT_SIMILARITY      = 1.0   # no filtering by default
 RAG_PIPELINE_SIMILARITY     = 0.3   # used in LLMsForEduQG pipeline
-
+CHROMA_PERSIST_DIR = "chroma_store"
 # ── Metrics ───────────────────────────────────────────────
 BERT_MODEL = "bert-base-uncased"
 

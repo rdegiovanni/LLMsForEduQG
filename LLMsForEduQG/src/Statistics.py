@@ -71,8 +71,8 @@ class Statistics:
         # A = (r1/m - (m+1)/2)/n # formula (14) in Vargha and Delaney, 2000
         A = (2 * r1 - m * (m + 1)) / (2 * n * m)  # equivalent formula to avoid accuracy errors
 
-        levels = [0.147, 0.33, 0.474]  # effect sizes from Hess and Kromrey, 2004
-        magnitude = ["negligible", "small", "medium", "large"]
+        levels = VDA_LEVELS
+        magnitude = VDA_MAGNITUDE
         scaled_A = (A - 0.5) * 2
 
         magnitude = magnitude[bisect_left(levels, abs(scaled_A))]
